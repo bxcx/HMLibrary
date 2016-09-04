@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TabIndicator -->
+    <declare-styleable name="TabIndicator">
+        <!-- 图标数组,应用在单图标渐变 -->
+        <attr name="tabIcons" format="reference"/>
+        <!-- 选中图标数组 -->
+        <attr name="tabSelectedIcons" format="reference"/>
+        <!-- 未选中图标数组 -->
+        <attr name="tabUnselectedIcons" format="reference"/>
+        <!-- 文字数组 -->
+        <attr name="tabLabels" format="reference"/>
+        <!-- 选中时颜色 -->
+        <attr name="tabSelectedColor" format="reference|color"/>
+        <!-- 未选中时颜色 -->
+        <attr name="tabUnselectedColor" format="reference|color"/>
+        <!-- 文字字体大小 -->
+        <attr name="tabTextSize" format="dimension"/>
+        <!-- 条目边距 -->
+        <attr name="tabItemPadding" format="dimension"/>
+        <!-- 是否渐变切换 -->
+        <attr name="tabGradualChange" format="boolean"/>
+        <!-- 指示点大小 -->
+        <attr name="TabIndicatorSize" format="dimension"/>
+    </declare-styleable>
+
+    <!--PagerSlidingTabStrip!-->
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color" />
+        <attr name="pstsUnderlineColor" format="color" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="zmsTabTextSize" format="dimension" />
+        <attr name="zmsTabTextColor" format="color" />
+        <attr name="zmsSelectedTabTextSize" format="dimension" />
+        <attr name="zmsSelectedTabTextColor" format="color" />
+    </declare-styleable>
+
+    <!-- DiscreteSeekBar specific attributes -->
+    <attr name="discreteSeekBarStyle" format="reference"/>
+    <declare-styleable name="DiscreteSeekBar">
+        <attr name="dsb_min" format="integer|dimension"/>
+        <attr name="dsb_max" format="integer|dimension"/>
+        <attr name="dsb_value" format="integer|dimension"/>
+        <attr name="dsb_mirrorForRtl" format="boolean"/>
+        <attr name="dsb_allowTrackClickToDrag" format="boolean"/>
+        <attr name="dsb_progressColor" format="color|reference"/>
+        <attr name="dsb_trackColor" format="color|reference"/>
+        <attr name="dsb_indicatorTextAppearance" format="reference"/>
+        <attr name="dsb_indicatorColor" format="color|reference"/>
+        <attr name="dsb_indicatorElevation" format="dimension"/>
+        <attr name="dsb_indicatorFormatter" format="string|reference"/>
+        <attr name="dsb_rippleColor" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircularSeekBar">
+        <attr name="cs_progress" format="integer"/>
+        <attr name="cs_max" format="integer"/>
+        <attr name="move_outside_circle" format="boolean"/>
+        <attr name="maintain_equal_circle" format="boolean"/>
+        <attr name="use_custom_radii" format="boolean"/>
+        <attr name="lock_enabled" format="boolean"/>
+        <attr name="circle_x_radius" format="dimension" />
+        <attr name="circle_y_radius" format="dimension" />
+        <attr name="circle_stroke_width" format="dimension" />
+        <attr name="pointer_radius" format="dimension" />
+        <attr name="pointer_halo_width" format="dimension" />
+        <attr name="pointer_halo_border_width" format="dimension"/>
+        <attr name="circle_color" format="color"/>
+        <attr name="circle_progress_color" format="color"/>
+        <attr name="pointer_color" format="color"/>
+        <attr name="pointer_halo_color" format="color"/>
+        <attr name="pointer_halo_color_ontouch" format="color"/>
+        <attr name="pointer_alpha_ontouch" format="integer"/>
+        <attr name="start_angle" format="float"/>
+        <attr name="end_angle" format="float"/>
+        <attr name="circle_fill" format="color"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,90 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'org.jetbrains.anko:anko-sdk15:0.8+'
+    // sdk19, sdk21, sdk23 are also available
+    compile 'org.jetbrains.anko:anko-support-v4:0.8+'
+    // In case you need support-v4 bindings
+    compile 'org.jetbrains.anko:anko-appcompat-v7:0.8+'
+    // For appcompat-v7 bindings
+
+    //水波效果
+    compile 'com.balysv:material-ripple:1.0.2'
+
+    //加载动画 https://github.com/yankai-victor/Loading
+    compile 'com.victor:lib:1.0.4'
+
+    //滑动返回 https://github.com/Jude95/SwipeBackHelper
+    compile 'com.jude:swipebackhelper:3.1.2'
+
+    //https://github.com/Clans/FloatingActionButton
+    //compile 'com.github.clans:fab:1.6.2'
+
+    //Material Design https://github.com/vajro/MaterialDesignLibrary
+    //https://github.com/navasmdc/MaterialDesignLibrary
+    compile 'com.github.vajro:MaterialDesignLibrary:1.6'
+
+    //AndroidSweetSheet https://github.com/zzz40500/AndroidSweetSheet
+    compile 'com.github.zzz40500:AndroidSweetSheet:1.1.0'
+
+    //http请求 https://github.com/hongyangAndroid/okhttp-utils
+    compile 'com.zhy:okhttputils:2.2.0+'
+    //通用缓存 https://github.com/orhanobut/hawk
+    compile 'com.github.orhanobut:hawk:1.21+'
+    //json序列化 https://github.com/google/gson
+    compile 'com.google.code.gson:gson:2.2.4+'
+    //图片加载 https://github.com/nostra13/Android-Universal-Image-Loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5+'
+    //Log日志 https://github.com/orhanobut/logger
+    compile 'com.orhanobut:logger:1.11+'
+
+
+    //RecyclerView https://github.com/jdsjlzx/LRecyclerView
+    //compile 'com.github.jdsjlzx:LRecyclerView:1.0.8'
+
+    //ObservableScrollView https://github.com/ksoichiro/Android-ObservableScrollView
+    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+}
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    jcenter()
+}
