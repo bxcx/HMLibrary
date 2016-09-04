@@ -5,7 +5,7 @@
 
 ## 配置 ##
 
-kotlin config
+kotlin config   
 ![](http://ww1.sinaimg.cn/large/72f96cbagw1f7hxdqd213j20cc05pdg9.jpg)
 
 build.gradle
