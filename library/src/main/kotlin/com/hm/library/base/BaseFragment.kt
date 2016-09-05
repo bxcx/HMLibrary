@@ -24,6 +24,9 @@ abstract class BaseFragment : Fragment() {
 
     var initCompleteRunnable: () -> Unit = {}
 
+    open fun setUIParams() {
+    }
+
     /**
     检查调用本类必需传递的参数条件是否满足
     默认返回true，在需要的类中重写此方法即可
@@ -69,6 +72,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        setUIParams()
         if (rootView == null) {
             rootView = inflater!!.inflate(layoutResID, null)
             isInit = true

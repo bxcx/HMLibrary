@@ -143,19 +143,17 @@ abstract class BaseViewHolder<T : Any> : RecyclerView.ViewHolder, onStateChanged
 
     constructor(itemView: View) : super(itemView) {
         handleView = itemView.findViewById(R.id.handleView)
-        ViewBindUtil.bindViews(this,itemView)
+        ViewBindUtil.bindViews(this, itemView)
     }
 
     abstract fun setContent(position: Int)
 
     override fun onItemSelected() {
-        println("onItemSelected")
         //设置item的背景颜色为浅灰色
         itemView?.setBackgroundColor(Color.LTGRAY)
     }
 
     override fun onItemClear() {
-        println("onItemClear")
         //恢复item的背景颜色
         itemView?.setBackgroundColor(0)
     }
@@ -169,15 +167,12 @@ abstract class BaseViewHolder<T : Any> : RecyclerView.ViewHolder, onStateChanged
     }
 }
 
-open class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment(), BaseListView<H>, PullRefreshLoadRecyclerView.LoadRefreshListener, PullRefreshLoadRecyclerView.onStartDragListener {
+abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment(), BaseListView<H>, PullRefreshLoadRecyclerView.LoadRefreshListener, PullRefreshLoadRecyclerView.onStartDragListener {
 
     override fun startDrag(viewHolder: RecyclerView.ViewHolder?) {
         mItemTouchHelper?.startDrag(viewHolder)
     }
 
-    override fun getView(parent: ViewGroup?, position: Int): H {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override var layoutResID: Int = -1
     open var itemResID: Int = -1
@@ -218,11 +213,8 @@ open class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment(), Ba
     open var canSwipe: Boolean = false
     open var swipeType = SwipeType.Delete
 
-    open fun setListParams() {
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setListParams()
+        setUIParams()
 
         if (rootView == null) {
 

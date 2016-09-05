@@ -21,9 +21,10 @@ import java.util.*
 /**
  * 数据模型的基类，所有网络实体对象都要继承此类
  */
-open class HMModel(var status: String = "ok", var error: String)
-
-open class HMData()
+abstract class HMModel() {
+    abstract var valid: Boolean
+    abstract var error: String
+}
 
 interface OnHMResponse<T> {
     fun onResponse(obj: T?)
@@ -168,7 +169,6 @@ class HMRequest {
                     Logger.d("${Date()}\n$method\n$fullUrl")
                     Logger.json(str)
 
-
                     val obj: T? = Gson().fromJson(str, T::class.java)
                     return obj
                 }
@@ -261,7 +261,7 @@ class HMRequest {
                 //                    HttpResult.OK -> check = true
                 //                }
                 //wpAPI的status为ok/error
-                check = "ok".equals(response.status)
+                check = response.valid
                 if (!check) {
                     activity?.toast(response.error)
                 }
