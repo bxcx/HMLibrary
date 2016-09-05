@@ -44,7 +44,7 @@ class DemoBaseListFragment : BaseListFragment<CookModel, CookHolder>() {
 
     override fun getView(parent: ViewGroup?, position: Int): CookHolder = CookHolder(getItemView(parent))
 
-    class CookListModel(status: Boolean, error: String) : DemoModel(status, error) {
+    class CookListModel(errno: Int, error: String) : BaseModel(errno, error) {
 
         var tngou: ArrayList<CookModel>? = null
 
@@ -63,12 +63,13 @@ class DemoBaseListFragment : BaseListFragment<CookModel, CookHolder>() {
 
 }
 
-open class DemoModel(var status: Boolean, override var error: String = "") : HMModel() {
+open class BaseModel(var errno: Int, var msg: String) : HMModel() {
 
-    override var valid: Boolean
-        get() = status
-        set(value) {
-        }
+    override var valid: Boolean = false
+        get() = errno == 0
+
+    override var message: String = ""
+        get() = msg
 
 }
 

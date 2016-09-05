@@ -23,7 +23,7 @@ import java.util.*
  */
 abstract class HMModel() {
     abstract var valid: Boolean
-    abstract var error: String
+    abstract var message: String
 }
 
 interface OnHMResponse<T> {
@@ -125,7 +125,14 @@ class HMRequest {
             })
         }
 
-        inline fun <reified T : Any> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMApp.createParams(), method: Method = Method.POST,
+        //url 接口地址
+        //params 参数 选传 默认为空
+        //method 请求方式 选传 默认为GET
+        //headers 请求头 选传 默认为空
+        //activity 请求所在的Activity, 用于请求失败时给出Toast错误提示 选传 默认为空
+        //cache 是否缓存到本地 选传 默认为默认为false
+        //needCallBack 请求失败时是否执行回调 选传 默认为false
+        inline fun <reified T : HMModel> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMApp.createParams(), method: Method = Method.POST,
                                         headers: HashMap<String, String> = HMApp.createHeader(), activity: Activity? = null,
                                         cache: Boolean = false, needCallBack: Boolean = false,
                                         crossinline completionHandler: (T?) -> Unit) {
@@ -263,7 +270,7 @@ class HMRequest {
                 //wpAPI的status为ok/error
                 check = response.valid
                 if (!check) {
-                    activity?.toast(response.error)
+                    activity?.toast(response.message)
                 }
             }
             return check
