@@ -4,7 +4,7 @@ tags： HMLibrary
 
 ---
 
-![](https://github.com/bxcx/HMLibrary/blob/master/md/BaseMainActivity.gif)
+![](https://github.com/bxcx/HMLibrary/blob/master/md/baseMainActivity.gif)
 
 ## Example ##
 
