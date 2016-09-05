@@ -8,4 +8,5 @@ package com.hm.library.util
  */
 object ArgumentUtil {
     val Arg_ID = "Arg_ID"
+    val Arg_Name = "Arg_Name"
 }

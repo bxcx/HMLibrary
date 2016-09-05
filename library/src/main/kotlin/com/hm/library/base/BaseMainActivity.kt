@@ -3,9 +3,12 @@ package com.hm.library.base
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import com.hm.library.R
 import com.hm.library.resource.tabindicator.TabPageIndicatorEx
 import com.hm.library.resource.view.SViewPager
 import com.jude.swipbackhelper.SwipeBackHelper
+import org.jetbrains.anko.find
+import org.jetbrains.anko.support.v4.onPageChangeListener
 import java.util.*
 
 /**
@@ -15,14 +18,15 @@ import java.util.*
  *
  * xml:<p>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:hm="http://schemas.android.com/apk/res-auto"
+xmlns:att="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
+android:background="#ffffff"
 android:orientation="vertical">
 
 <com.hm.library.resource.view.SViewPager
-android:id="@+id/activiy_base_viewpager"
-android:layout_width="fill_parent"
+android:id="@id/main_viewpager"
+android:layout_width="match_parent"
 android:layout_height="0dp"
 android:layout_weight="1"/>
 
@@ -32,16 +36,16 @@ android:layout_height="wrap_content"
 android:layout_gravity="bottom">
 
 <com.hm.library.resource.tabindicator.TabPageIndicatorEx
-android:id="@+id/activiy_base_tabpage"
+android:id="@id/main_tabpage"
 android:layout_width="match_parent"
 android:layout_height="60dp"
 android:background="@drawable/tabbg"
-hm:tabTextSize="12sp"
-hm:tabIcons="@array/bottom_bar_icons"
-hm:tabLabels="@array/bottom_bar_labels"
-hm:tabSelectedColor="#3F51B5"
-hm:tabUnselectedColor="#555555"
-hm:tabItemPadding="8dp"/>/>
+att:tabIcons="@array/bottom_bar_icons"
+att:tabItemPadding="8dp"
+att:tabLabels="@array/bottom_bar_labels"
+att:tabSelectedColor="#00bb9c"
+att:tabTextSize="12sp"
+att:tabUnselectedColor="#a9b7b7"/>/>
 </FrameLayout>
 
 </LinearLayout>
@@ -54,7 +58,7 @@ abstract class BaseMainActivity : BaseActivity() {
     //
     var mViewPager: SViewPager? = null
     var mTabPageIndicator: TabPageIndicatorEx? = null
-    abstract val mTabs: ArrayList<Fragment>
+    val mTabs: ArrayList<Fragment> = ArrayList()
 
     private var mAdapter: FragmentPagerAdapter? = null
     private var isGradualChange: Boolean = false
@@ -70,15 +74,18 @@ abstract class BaseMainActivity : BaseActivity() {
         mTabPageIndicator = tabPageIndicator
     }
 
-    override fun checkParams(): Boolean {
-        return false
-    }
-
     override fun initUI() {
         initTabs()
+        super.initUI()
     }
 
     private fun initTabs() {
+
+        if (mViewPager == null)
+            mViewPager = find(R.id.main_viewpager)
+        if (mTabPageIndicator == null)
+            mTabPageIndicator = find(R.id.main_tabpage)
+
         mAdapter = object : FragmentPagerAdapter(supportFragmentManager) {
 
             override fun getCount(): Int {
@@ -89,9 +96,19 @@ abstract class BaseMainActivity : BaseActivity() {
                 return mTabs[position]
             }
         }
+        mViewPager!!.onPageChangeListener {
+
+            onPageSelected {
+                onTabSelected(it)
+            }
+        }
         mViewPager!!.adapter = mAdapter
         mTabPageIndicator!!.setViewPager(mViewPager!!)
-        mTabPageIndicator!!.setOnTabSelectedListener { index -> mViewPager!!.setCurrentItem(index, false) }
+        mTabPageIndicator!!.setOnTabSelectedListener { mViewPager!!.setCurrentItem(it, false) }
+    }
+
+    open fun onTabSelected(index: Int) {
 
     }
+
 }

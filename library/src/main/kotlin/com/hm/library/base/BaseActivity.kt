@@ -31,6 +31,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     open var layoutResID: Int = -1
     open var needBind: Boolean = false
     open var hideActionBar: Boolean = false
+    open var displayHome: Boolean = true
     open var swipeBack: Boolean = true
     open var menuRes: Int = -1
 
@@ -42,9 +43,11 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     private var mProgressDialog: LoadingDialog? = null
     private var tipsToast: TipsToast? = null
 
+    open fun setUIParams() {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (hideActionBar)
-            supportActionBar?.hide()
+        setUIParams()
 
         super.onCreate(savedInstanceState)
         if (layoutResID != -1)
@@ -54,8 +57,13 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             ViewBindUtil.bindViews(this, window.decorView)
 
         toolbar = findViewById(R.id.toolbar) as Toolbar?
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if (toolbar != null) {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
+        }
+
+        if (hideActionBar)
+            supportActionBar?.hide()
 
         if (swipeBack) {
             SwipeBackHelper.onCreate(this)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 首页导航 -->
+    <string-array name="bottom_bar_labels">
+        <item>"妙笔"</item>
+        <item>"纯音"</item>
+        <item>"自然"</item>
+        <item>"爱听"</item>
+    </string-array>
+    <string-array name="bottom_bar_icons">
+        <item>@mipmap/ic_menu_article</item>
+        <item>@mipmap/ic_menu_music</item>
+        <item>@mipmap/ic_menu_nature</item>
+        <item>@mipmap/ic_menu_iting</item>
+    </string-array>
+
+</resources>

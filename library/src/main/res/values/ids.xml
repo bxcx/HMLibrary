@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="handleView" type="id">0xff001001</item>
+
+
+    <item name="main_viewpager" type="id">0xff001001</item>
+    <item name="main_tabpage" type="id">0xff001002</item>
+    <item name="handleView" type="id">0xff001003</item>
 </resources>
