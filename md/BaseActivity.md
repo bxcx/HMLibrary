@@ -59,12 +59,12 @@ cond(no)->finish->onDestroy
 ## Example ##
 
     //如果只需要设置UIParams中的少量参数,可以直接在这里override,用逗号隔开
-    class MainActivity(override var layoutResID: Int = R.layout.activity_main) : BaseActivity() {
+    class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_base_activity) : BaseActivity() {
     
         override fun initUI() {
             super.initUI()
             
-            //不用findVidw,直接使用布局中的id即控件
+            //不用findView,直接使用布局中的id即控件
             tv_hello.text = "Hello!"
             btn_toast.onClick { showToast("Welcome to HMLibrary") }
             btn_tips.onClick { showTips(TipsToast.TipType.Smile, "Thanks for using") }
