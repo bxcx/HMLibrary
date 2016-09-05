@@ -2,7 +2,8 @@
 
 Tags: HMLibrary
 
----
+![](https://github.com/bxcx/HMLibrary/blob/master/md/baseActivity.gif)
+
 ##流程##
 
 ```flow
