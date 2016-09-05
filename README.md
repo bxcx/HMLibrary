@@ -1,18 +1,26 @@
+# README
 
-# HMLibrary
-
+tags： HMLibrary
 
 
 ## 配置 ##
 
-kotlin config   
-![](http://ww1.sinaimg.cn/large/72f96cbagw1f7hxdqd213j20cc05pdg9.jpg)
+1. kotlin config   
+![](https://github.com/bxcx/HMLibrary/blob/master/config%20kotlin.jpg)
 
-build.gradle
+2. build.gradle
 
-    dependencies {
-        compile 'com.github.bxcx:HMLibrary:v0.0.1'
-    }
+        dependencies {
+            compile 'com.github.bxcx:HMLibrary:v0.0.1'
+        }
 
 
-## 使用方法 ##
+3. Application/AndroidManifest
+
+        <application android:name="com.hm.library.app.HMApp" .../>
+        
+    或
+
+        class DemoApp : HMApp() {}
+        <application android:name="your.package.DemoApp" .../>
+
