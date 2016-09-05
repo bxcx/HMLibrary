@@ -4,6 +4,22 @@ Tags: HMLibrary
 
 ![](https://github.com/bxcx/HMLibrary/blob/master/md/baseActivity.gif)
 
+## Example ##
+
+    //如果只需要设置UIParams中的少量参数,可以直接在这里override,用逗号隔开
+    class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_base_activity) : BaseActivity() {
+    
+        override fun initUI() {
+            super.initUI()
+            
+            //不用findView,直接使用布局中的id即控件
+            tv_hello.text = "Hello!"
+            btn_toast.onClick { showToast("Welcome to HMLibrary") }
+            btn_tips.onClick { showTips(TipsToast.TipType.Smile, "Thanks for using") }
+        }
+    
+    }
+
 ##流程##
 
 ```flow
@@ -57,18 +73,3 @@ cond(no)->finish->onDestroy
         showTips(tipType: TipsToast.TipType, msg: String)
         showTips(iconResId: Int, msg: String)
         
-## Example ##
-
-    //如果只需要设置UIParams中的少量参数,可以直接在这里override,用逗号隔开
-    class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_base_activity) : BaseActivity() {
-    
-        override fun initUI() {
-            super.initUI()
-            
-            //不用findView,直接使用布局中的id即控件
-            tv_hello.text = "Hello!"
-            btn_toast.onClick { showToast("Welcome to HMLibrary") }
-            btn_tips.onClick { showTips(TipsToast.TipType.Smile, "Thanks for using") }
-        }
-    
-    }
