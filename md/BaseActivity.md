@@ -30,7 +30,7 @@ cond(no)->finish->onDestroy
             swipeBack = true                        //是否开启手势右滑返回,默认为true
             hideActionBar = false                   //是否隐藏toolBar,默认为false
             displayHome = false                     //是否显示toolBar返回箭头,默认为true
-    }
+        }
 
 ## Method ##
 
