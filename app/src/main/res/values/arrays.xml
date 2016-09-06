@@ -3,16 +3,16 @@
 
     <!-- 首页导航 -->
     <string-array name="bottom_bar_labels">
-        <item>"妙笔"</item>
-        <item>"纯音"</item>
-        <item>"自然"</item>
-        <item>"爱听"</item>
+        <item>"首页"</item>
+        <item>"附近"</item>
+        <item>"精选"</item>
+        <item>"我的"</item>
     </string-array>
     <string-array name="bottom_bar_icons">
-        <item>@mipmap/ic_menu_article</item>
-        <item>@mipmap/ic_menu_music</item>
-        <item>@mipmap/ic_menu_nature</item>
-        <item>@mipmap/ic_menu_iting</item>
+        <item>@mipmap/tab_ic_home_normal</item>
+        <item>@mipmap/tab_ic_nearby_normal</item>
+        <item>@mipmap/tab_ic_featured_normal</item>
+        <item>@mipmap/tab_ic_mine_normal</item>
     </string-array>
 
 </resources>

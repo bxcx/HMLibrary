@@ -39,7 +39,7 @@
             att:tabIcons="@array/bottom_bar_icons"
             att:tabItemPadding="8dp"
             att:tabLabels="@array/bottom_bar_labels"
-            att:tabSelectedColor="#00bb9c"
+            att:tabSelectedColor="@color/colorPrimaryDark"
             att:tabTextSize="12sp"
             att:tabUnselectedColor="#a9b7b7"/>/>
     </FrameLayout>
