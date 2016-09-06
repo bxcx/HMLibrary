@@ -37,11 +37,61 @@ tags： HMLibrary
         HMRequest.go<DealListModel>(url, params) {}
         HMRequest.go<DealListModel>(url, params, cache = true) {}
  - [BaseMainActivity][1]   
-![](https://github.com/bxcx/HMLibrary/blob/master/md/baseMainActivity.gif)   
+
+            class DemoMainActivity(override var layoutResID: Int = R.layout.activity_demo_main) : BaseMainActivity() {
+        
+        
+                val titles = arrayOf("首页", "附近", "精选", "我的")
+            
+            
+                override fun setUIParams() {
+                    titles.forEach { mTabs.add(BlankFragment.newInstance(it)) }
+                }
+            
+            
+                override fun initComplete() {
+                    //三秒后执行
+                    runDelayed({
+                        //模拟红点
+                        main_tabpage.setIndicateDisplay(3, true)
+                    }, 3000)
+            
+                    //是否可以滑动，滑动是否有渐变效果
+                    main_tabpage.setStyle(true, true)
+                }
+            
+                override fun onTabSelected(index: Int) {
+                    tv_title.text = titles[index]
+                }
+        
+            }
+
+ ![](https://github.com/bxcx/HMLibrary/blob/master/md/baseMainActivity.gif) 
+  
  - [BaseActivity][2]   
-![](https://github.com/bxcx/HMLibrary/blob/master/md/baseActivity.gif)   
 
-
+        //如果只需要设置UIParams中的少量参数,可以直接在这里override,用逗号隔开
+        class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_base_activity) : BaseActivity() {
+        
+            override fun setUIParams() {
+                layoutResID = R.layout.activity_demo_base_activity    //activity布局id
+                menuRes = R.menu.menu_save              //toolBar的MenuID
+                needBind = false                        //是否需要bindView,默认为false,java类需要设置为true,kotlin类不需要
+                swipeBack = true                        //是否开启手势右滑返回,默认为true
+                hideActionBar = false                    //是否隐藏toolBar,默认为false
+                displayHome = false                     //是否显示toolBar返回箭头,默认为true
+            }
+        
+            override fun initUI() {
+                super.initUI()
+                tv_hello.text = "Hello!"
+        
+                btn_toast.onClick { showToast("Welcome to HMLibrary") }
+                btn_tips.onClick { showTips(TipsToast.TipType.Smile, "Thanks for using") }
+            }
+        
+        }
+![](https://github.com/bxcx/HMLibrary/blob/master/md/baseActivity.gif) 
 
 
   [1]: https://github.com/bxcx/HMLibrary/blob/master/md/BaseMainActivity.md
