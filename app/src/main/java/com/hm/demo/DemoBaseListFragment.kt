@@ -42,6 +42,20 @@ class DemoBaseListFragment : BaseListFragment<DealModel, DealHolder>() {
         default_pageIndex = 1
         //每页加载多少条数据, 默认为10
         default_pageSize = 5
+
+    }
+
+    override fun initUI() {
+        super.initUI()
+
+        //监听Item移动事件 拖拽排序
+        onItemMove = { fromPosition, toPosition ->
+            showToast("onItemMove")
+        }
+        //监听Item删除事件 侧滑删除
+        onItemDismiss = { position ->
+            showToast("onItemDismiss")
+        }
     }
 
     //不需要设置下拉刷新\上拉加载更多的事件及逻辑, 只需要一个loadData方法
