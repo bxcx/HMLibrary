@@ -61,7 +61,7 @@ tags： HMLibrary
             HMRequest.go<DealListModel>(url, params) {}
             HMRequest.go<DealListModel>(url, params, cache = true) {}
 
- 5. 默认**params**及**header**
+ 5. 默认**params**及**header**   
     建议将每个接口都必须要传递的一些参数封装起来并作为默认参数, 例如每个接口都需要传递当前用户的sessionId或者personalId, 那我们可以选择一个地方修改 **HMRequest** 中的默认**params**
 
         class DemoApp : HMApp() {
