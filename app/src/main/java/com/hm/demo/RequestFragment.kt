@@ -1,13 +1,13 @@
 package com.hm.demo
 
 
+import com.hm.demo.DemoBaseListFragment.DealListModel
 import com.hm.library.base.BaseFragment
 import com.hm.library.http.HMRequest
 import com.hm.library.http.Method
 import kotlinx.android.synthetic.main.fragment_request.*
 import org.jetbrains.anko.onClick
 import org.jetbrains.anko.support.v4.act
-import java.util.*
 
 
 class RequestFragment(override var layoutResID: Int = R.layout.fragment_request) : BaseFragment() {
@@ -23,20 +23,23 @@ class RequestFragment(override var layoutResID: Int = R.layout.fragment_request)
         tv_url.text = "url:$url"
 
         btn_go.onClick {
-            val params = HashMap<String, Any>()
-            val headers = HashMap<String, String>()
+            val params = HMRequest.params
+            val header = HMRequest.header
+
+            params.put("string", "value")
+            params.put("int", 1)
 
             //url 接口地址
             //params 参数 选传 默认为空
             //method 请求方式 选传 默认为GET
-            //headers 请求头 选传 默认为空
+            //header 请求头 选传 默认为空
             //activity 请求所在的Activity, 用于请求失败时给出Toast错误提示 选传 默认为空
             //cache 是否缓存到本地 选传 默认为默认为false
             //needCallBack 请求失败时是否执行回调 选传 默认为false
 
-            HMRequest.go<DealListModel>(url = url, params = params, method = Method.GET, headers = headers, activity = act, cache = true, needCallBack = false) {
+            HMRequest.go<DealListModel>(url = url, params = params, method = Method.GET, header = header, activity = act, cache = true, needCallBack = false) {
                 //it即解析成功的实体类
-                showToast("返回数据共${it?.data?.size}条")
+//                showToast("返回数据共${it?.data?.size}条")
             }
 
             HMRequest.go<DealListModel>(url) {}
@@ -45,12 +48,6 @@ class RequestFragment(override var layoutResID: Int = R.layout.fragment_request)
         }
     }
 
-    class DealListModel(errno: Int, error: String) : BaseModel(errno, error) {
 
-        var data: ArrayList<DealModel>? = null
-
-        //实体类中的字段个数可以与json中不同, 可以多, 也可以少, 满足需求即可
-        class DealModel(var image: String, var title: String, var description: String)
-    }
 
 }

@@ -3,19 +3,20 @@ package com.hm.demo
 
 import android.view.View
 import android.view.ViewGroup
-import com.hm.demo.DemoBaseListFragment.CookHolder
-import com.hm.demo.DemoBaseListFragment.CookListModel.CookModel
+import com.hm.demo.DemoApp.BaseModel
+import com.hm.demo.DemoBaseListFragment.DealHolder
+import com.hm.demo.DemoBaseListFragment.DealListModel.DealModel
 import com.hm.library.base.BaseListFragment
 import com.hm.library.base.BaseViewHolder
 import com.hm.library.expansion.show
-import com.hm.library.http.HMModel
 import com.hm.library.http.HMRequest
 import com.hm.library.resource.recyclerview.PullRefreshLoadRecyclerView
-import kotlinx.android.synthetic.main.item_cook.view.*
+import kotlinx.android.synthetic.main.item_deal.view.*
+import org.jetbrains.anko.support.v4.act
 import java.util.*
 
 
-class DemoBaseListFragment : BaseListFragment<CookModel, CookHolder>() {
+class DemoBaseListFragment : BaseListFragment<DealModel, DealHolder>() {
 
     override fun setUIParams() {
         //是否能刷新
@@ -29,47 +30,57 @@ class DemoBaseListFragment : BaseListFragment<CookModel, CookHolder>() {
         //侧滑方式 支持Layout(滑动菜单) Delete(滑动删除)
         swipeType = PullRefreshLoadRecyclerView.SwipeType.Layout
 
-        itemResID = R.layout.item_cook
+        //item的布局文件
+        itemResID = R.layout.item_deal
+
+        //接口定义的分页参数
+        default_params_page = "page"
+        default_params_pageSize = "page_size"
+        //从第几页开始, 默认为1
+        default_pageIndex = 1
+        //每页加载多少条数据, 默认为10
+        default_pageSize = 5
     }
 
+    //不需要设置下拉刷新\上拉加载更多的事件及逻辑, 只需要一个loadData方法
     override fun loadData() {
-        val url = "http://www.tngou.net/api/cook/list"
-        val params = createParams
+        //百度糯米API http://apistore.baidu.com/apiworks/servicedetail/508.html
+        val url = "http://apis.baidu.com/baidunuomi/openapi/searchdeals"
+        //BaseListFragment中内置的listParams, 带有page和pageSize, 也可自行定义
+        val params = listParams
+        params.put("city_id", 100010000)
 
-        HMRequest.go<CookListModel>(url, params, cache = true, needCallBack = true) {
-            loadCompleted(it?.tngou)
+        //分页请求通常需要needCallBack = true, 在请求失败时BaseListFragment会自动page--
+        HMRequest.go<DealListModel>(url, params, activity = act, cache = false, needCallBack = true) {
+            loadCompleted(it?.data?.deals)
         }
     }
 
 
-    override fun getView(parent: ViewGroup?, position: Int): CookHolder = CookHolder(getItemView(parent))
+    override fun getView(parent: ViewGroup?, position: Int): DealHolder = DealHolder(getItemView(parent))
 
-    class CookListModel(errno: Int, error: String) : BaseModel(errno, error) {
+    class DealListModel(errno: Int, msg: String) : BaseModel(errno, msg) {
 
-        var tngou: ArrayList<CookModel>? = null
+        var data: DealData? = null
 
-        class CookModel(var id: Long, var name: String, var description: String, var img: String)
+        class DealData(var total: Int, var deals: ArrayList<DealModel>? = null)
+
+        //实体类中的字段个数可以与json中不同, 可以多, 也可以少, 满足需求即可
+        class DealModel(var image: String, var title: String, var description: String)
     }
 
-    class CookHolder(itemView: View) : BaseViewHolder<CookModel>(itemView) {
+    class DealHolder(itemView: View) : BaseViewHolder<DealModel>(itemView) {
 
         override fun setContent(position: Int) {
-            itemView.tv_name.text = data.name
+            //进到此方法后可直接使用 data对象, 即当前绑定的数据实体
+            itemView.tv_name.text = data.title
             itemView.tv_desc.text = data.description
-            itemView.iv_pic.show("http://tnfs.tngou.net/img" + data.img)
+            itemView.iv_pic.show(data.image)
         }
 
     }
 
 }
 
-open class BaseModel(var errno: Int, var msg: String) : HMModel() {
 
-    override var valid: Boolean = false
-        get() = errno == 0
-
-    override var message: String = ""
-        get() = msg
-
-}
 

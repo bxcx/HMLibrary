@@ -5,7 +5,6 @@ import android.app.Activity
 import com.google.gson.Gson
 import com.hm.hmlibrary.HttpServerPath
 import com.hm.library.app.Cacher
-import com.hm.library.app.HMApp
 import com.orhanobut.logger.Logger
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.Callback
@@ -37,9 +36,12 @@ class HMRequest {
 
     companion object {
 
+        open var params: HashMap<String, Any> = HashMap()
+        open var header: HashMap<String, String> = HashMap()
+
         //临时解决方案 供java调用
-        fun <T : Any> go(clazz: Class<T>, url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMApp.createParams(), method: Method = Method.POST,
-                         headers: HashMap<String, String> = HMApp.createHeader(), activity: Activity? = null,
+        fun <T : Any> go(clazz: Class<T>, url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = Method.POST,
+                         header: HashMap<String, String> = HMRequest.header, activity: Activity? = null,
                          cache: Boolean = false, needCallBack: Boolean = false,
                          rsp: OnHMResponse<T>?) {
 
@@ -53,8 +55,8 @@ class HMRequest {
             params.keys.forEach { key ->
                 builder.addParams(key, "${params[key]}")
             }
-            headers.keys.forEach { key ->
-                builder.addHeader(key, headers[key])
+            header.keys.forEach { key ->
+                builder.addHeader(key, header[key])
             }
 
             //拼装带参数的URL地址，在控制台输出并根据它设置缓存
@@ -128,14 +130,14 @@ class HMRequest {
         //url 接口地址
         //params 参数 选传 默认为空
         //method 请求方式 选传 默认为GET
-        //headers 请求头 选传 默认为空
+        //header 请求头 选传 默认为空
         //activity 请求所在的Activity, 用于请求失败时给出Toast错误提示 选传 默认为空
         //cache 是否缓存到本地 选传 默认为默认为false
         //needCallBack 请求失败时是否执行回调 选传 默认为false
-        inline fun <reified T : HMModel> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMApp.createParams(), method: Method = Method.POST,
-                                        headers: HashMap<String, String> = HMApp.createHeader(), activity: Activity? = null,
-                                        cache: Boolean = false, needCallBack: Boolean = false,
-                                        crossinline completionHandler: (T?) -> Unit) {
+        inline fun <reified T : HMModel> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = Method.GET,
+                                            header: HashMap<String, String> = HMRequest.header, activity: Activity? = null,
+                                            cache: Boolean = false, needCallBack: Boolean = false,
+                                            crossinline completionHandler: (T?) -> Unit) {
 
             val builder = when (method) {
                 Method.GET -> OkHttpUtils.get()
@@ -146,13 +148,13 @@ class HMRequest {
             params.keys.forEach { key ->
                 builder.addParams(key, "${params[key]}")
             }
-            headers.keys.forEach { key ->
-                builder.addHeader(key, headers[key])
+            header.keys.forEach { key ->
+                builder.addHeader(key, header[key])
             }
 
             //拼装带参数的URL地址，在控制台输出并根据它设置缓存
             val fullUrl = getFullURL(url, params)
-            Logger.d("${Date()}\n$method\n$fullUrl")
+            Logger.w("${Date()}\n$method\n$fullUrl")
 
             //如果调用的地方需要读取缓存
             if (cache) {
@@ -264,10 +266,6 @@ class HMRequest {
         fun <T> checkResult(response: T, activity: Activity?): Boolean {
             var check: Boolean = false
             if (response is HMModel) {
-                //                when (response.status) {
-                //                    HttpResult.OK -> check = true
-                //                }
-                //wpAPI的status为ok/error
                 check = response.valid
                 if (!check) {
                     activity?.toast(response.message)

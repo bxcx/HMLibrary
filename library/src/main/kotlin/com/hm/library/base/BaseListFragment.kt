@@ -16,7 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.hm.library.R
-import com.hm.library.app.HMApp
+import com.hm.library.http.HMRequest
 import com.hm.library.resource.recyclerview.PullRefreshLoadRecyclerView
 import com.hm.library.resource.recyclerview.PullRefreshLoadRecyclerView.SwipeType
 import com.hm.library.resource.recyclerview.WrapperAdapter
@@ -184,11 +184,8 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
     /// 动作标识
     var action: LoadAction = LoadAction.LoadNew
 
-    /// 当前页，如果后台是从0开始那这里就修改为0
+    /// 当前页
     var page: Int = 1
-
-    /// 每页加载多少条
-    var pageSize: Int = 10
 
     /// 数据源集合
     var dataList: ArrayList<T> = ArrayList()
@@ -213,8 +210,16 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
     open var canSwipe: Boolean = false
     open var swipeType = SwipeType.Delete
 
+    //从第几页开始
+    open var default_pageIndex = 1
+    // 每页加载多少条
+    open var default_pageSize = 10
+    open var default_params_page = "page"
+    open var default_params_pageSize = "pageSize"
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setUIParams()
+        page = default_pageIndex
 
         if (rootView == null) {
 
@@ -303,7 +308,7 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
      */
     open fun loadRefresh() {
         recyclerView?.recyclerView?.scrollToPosition(0)
-        page = 1
+        page = default_pageIndex
         action = LoadAction.LoadNew
         loadData()
     }
@@ -339,13 +344,13 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
         }
 
         //list为nil时表示请求失败，需要page--
-        if (list != null && list!!.size > 0) {
-            for (data in list!!) {
+        if (list != null && list.size > 0) {
+            for (data in list) {
                 this.dataList.add(data)
             }
             adapter!!.notifyDataSetChanged(dataList)
 
-            if (list.size < pageSize)
+            if (list.size < default_pageSize)
                 loadMoreView?.state = LoadMoreView.STATE_NO_MORE
 
         } else {
@@ -359,18 +364,18 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
             }
 
             page--
-            if (page == 0) page = 1
+            if (page <= default_pageIndex) page = default_pageIndex
         }
 
 
     }
 
-    val createParams: HashMap<String, Any>
+    val listParams: HashMap<String, Any>
         get() {
-            var params = HMApp.createParams()
+            var params = HMRequest.params
             if (canLoadmore && canRefesh) {
-                params.put("page", "${page}")
-                params.put("count", "${pageSize}")
+                params.put(default_params_page, page)
+                params.put(default_params_pageSize, default_pageSize)
             }
             return params
         }

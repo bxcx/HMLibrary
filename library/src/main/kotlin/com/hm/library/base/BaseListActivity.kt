@@ -93,7 +93,7 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
     }
 
     val createParams: HashMap<String, Any>
-        get() = fragment!!.createParams
+        get() = fragment!!.listParams
 }
 
 
