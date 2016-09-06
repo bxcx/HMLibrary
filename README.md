@@ -11,7 +11,7 @@ tags： HMLibrary
 2. build.gradle
 
         dependencies {
-            compile 'com.github.bxcx:HMLibrary:v0.0.1'
+            compile 'com.github.bxcx:HMLibrary:v0.0.2'
         }
 
 
