@@ -32,7 +32,7 @@ class DemoMainActivity(override var layoutResID: Int = R.layout.activity_demo_ma
         }, 3000)
 
         //是否可以滑动，滑动是否有渐变效果
-        main_tabpage.setStyle(true, true)
+        main_tabpage.setStyle(false, true)
     }
 
     override fun onTabSelected(index: Int) {

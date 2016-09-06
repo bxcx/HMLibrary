@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<!--如果需要侧滑菜单,设置为LinearLayout -->
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:att="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
+    <!-- 正常情况显示的Layout -->
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="90dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/iv_pic"
+            android:layout_alignTop="@+id/handleView"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/iv_pic"
+            android:layout_toLeftOf="@+id/handleView"
             android:text="name"
             android:textColor="#212121"
             android:textSize="16sp"/>
@@ -29,14 +33,14 @@
             android:layout_below="@+id/tv_name"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:layout_toLeftOf="@+id/iv_pic"
+            android:layout_toLeftOf="@+id/handleView"
             android:maxLines="3"
             android:text="desc"
             android:textColor="#888888"
             android:textSize="12sp"/>
 
         <ImageView
-            android:id="@+id/iv_pic"
+            android:id="@id/handleView"
             android:layout_width="90dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
@@ -45,4 +49,54 @@
             android:src="@drawable/iv_defalut_image"/>
     </RelativeLayout>
 
-</RelativeLayout>
+    <!-- 滑动出现的Layout -->
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <!--MaterialRippleLayout 水波效果 只是为了好看,可以不用 -->
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/layout_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            att:mrl_rippleAlpha="0.1"
+            att:mrl_rippleColor="#000000"
+            att:mrl_rippleOverlay="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_top"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/layout_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            att:mrl_rippleAlpha="0.1"
+            att:mrl_rippleColor="#000000"
+            att:mrl_rippleOverlay="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_delete"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

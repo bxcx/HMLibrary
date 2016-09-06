@@ -11,7 +11,9 @@ import com.hm.library.base.BaseViewHolder
 import com.hm.library.expansion.show
 import com.hm.library.http.HMRequest
 import com.hm.library.resource.recyclerview.PullRefreshLoadRecyclerView
+import com.hm.library.resource.view.CustomToast
 import kotlinx.android.synthetic.main.item_deal.view.*
+import org.jetbrains.anko.onClick
 import org.jetbrains.anko.support.v4.act
 import java.util.*
 
@@ -75,7 +77,13 @@ class DemoBaseListFragment : BaseListFragment<DealModel, DealHolder>() {
             //进到此方法后可直接使用 data对象, 即当前绑定的数据实体
             itemView.tv_name.text = data.title
             itemView.tv_desc.text = data.description
-            itemView.iv_pic.show(data.image)
+            itemView.handleView.show(data.image)
+
+            itemView.layout_top.onClick { CustomToast.makeText(context, "Top clicked", 0).show() }
+            itemView.layout_delete.onClick {
+                adapter.onItemDismiss(position)
+                CustomToast.makeText(context, "Delete clicked", 0).show()
+            }
         }
 
     }
