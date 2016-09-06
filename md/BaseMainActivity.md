@@ -4,19 +4,23 @@ tags： HMLibrary
 
 ---
 
-![](https://github.com/bxcx/HMLibrary/blob/master/md/baseMainActivity.gif)
+![](https://github.com/bxcx/HMLibrary/blob/master/md/BaseMainActivity.gif)
 
 ## Example ##
 
  - activity
 
         class DemoMainActivity(override var layoutResID: Int = R.layout.activity_demo_main) : BaseMainActivity() {
-    
-            val titles = arrayOf("妙笔", "纯音", "自然", "爱听")
+        
+        
+            lateinit var titles: Array<String> //= arrayOf("首页", "附近", "精选", "我的")
+        
         
             override fun setUIParams() {
+                titles = resources.getStringArray(R.array.bottom_bar_labels)
                 titles.forEach { mTabs.add(BlankFragment.newInstance(it)) }
             }
+        
         
             override fun initComplete() {
                 //三秒后执行
@@ -32,6 +36,7 @@ tags： HMLibrary
             override fun onTabSelected(index: Int) {
                 tv_title.text = titles[index]
             }
+        
         }
 
  
@@ -78,7 +83,7 @@ tags： HMLibrary
                 att:tabIcons="@array/bottom_bar_icons"
                 att:tabItemPadding="8dp"
                 att:tabLabels="@array/bottom_bar_labels"
-                att:tabSelectedColor="#00bb9c"
+                att:tabSelectedColor="@color/colorPrimaryDark"
                 att:tabTextSize="12sp"
                 att:tabUnselectedColor="#a9b7b7"/>/>
         </FrameLayout>
@@ -89,19 +94,19 @@ tags： HMLibrary
  
     <resources>
     
-        <!-- 首页导航 -->
-        <string-array name="bottom_bar_labels">
-            <item>"妙笔"</item>
-            <item>"纯音"</item>
-            <item>"自然"</item>
-            <item>"爱听"</item>
-        </string-array>
-        <!-- 对应的图标,只需要一张灰色 -->
-        <string-array name="bottom_bar_icons">
-            <item>@mipmap/ic_menu_article</item>
-            <item>@mipmap/ic_menu_music</item>
-            <item>@mipmap/ic_menu_nature</item>
-            <item>@mipmap/ic_menu_iting</item>
-        </string-array>
+            <!-- 首页导航 -->
+            <string-array name="bottom_bar_labels">
+                <item>"首页"</item>
+                <item>"附近"</item>
+                <item>"精选"</item>
+                <item>"我的"</item>
+            </string-array>
+            <!-- 对应的图标,只需要一张灰色 -->
+            <string-array name="bottom_bar_icons">
+                <item>@mipmap/tab_ic_home_normal</item>
+                <item>@mipmap/tab_ic_nearby_normal</item>
+                <item>@mipmap/tab_ic_featured_normal</item>
+                <item>@mipmap/tab_ic_mine_normal</item>
+            </string-array>
     
     </resources>
