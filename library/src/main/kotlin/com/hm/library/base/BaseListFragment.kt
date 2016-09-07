@@ -24,6 +24,7 @@ import com.hm.library.resource.recyclerview.headfoot.LoadMoreView
 import com.hm.library.resource.recyclerview.headfoot.RefreshView
 import com.hm.library.resource.recyclerview.swipe.ItemSlideHelper
 import com.hm.library.util.ViewBindUtil
+import com.orhanobut.logger.Logger
 import org.jetbrains.anko.find
 import org.jetbrains.anko.internals.AnkoInternals
 import org.jetbrains.anko.support.v4.toast
@@ -238,7 +239,7 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
         // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         if (rootView!!.parent != null) {
             val parent = rootView!!.parent as ViewGroup
-            parent?.removeView(rootView)
+            parent.removeView(rootView)
         }
         return rootView
     }
@@ -354,13 +355,20 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
                 loadMoreView?.state = LoadMoreView.STATE_NO_MORE
 
         } else {
-            if (action == LoadAction.LoadMore) {
-                if (page > 2)
-                    toast("没有更多啦")
-                loadMoreView?.state = LoadMoreView.STATE_NO_MORE
-            }
-            if (list == null) {
-                loadMoreView?.state = LoadMoreView.STATE_LOAD_FAIL
+            if (page == default_pageIndex && (list == null || list.size == 0)) {
+                Logger.e("1")
+                adapter!!.notifyDataSetChanged(ArrayList())
+                recyclerView?.showLabel()
+                loadMoreView?.state = LoadMoreView.STATE_EMPTY_RELOAD
+            } else {
+                if (action == LoadAction.LoadMore) {
+                    if (page > 2)
+                        toast("没有更多啦")
+                    loadMoreView?.state = LoadMoreView.STATE_NO_MORE
+                }
+                if (list == null) {
+                    loadMoreView?.state = LoadMoreView.STATE_LOAD_FAIL
+                }
             }
 
             page--
@@ -408,12 +416,12 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
             return 0
         }
 
-        override fun getChildViewHolder(childView: View?): RecyclerView.ViewHolder {
-            return mRecyclerView!!.getChildViewHolder(childView)
+        override fun getChildViewHolder(childView: View?): RecyclerView.ViewHolder? {
+            return mRecyclerView?.getChildViewHolder(childView)
         }
 
-        override fun findTargetView(x: Float, y: Float): View {
-            return mRecyclerView!!.findChildViewUnder(x, y)
+        override fun findTargetView(x: Float, y: Float): View? {
+            return mRecyclerView?.findChildViewUnder(x, y)
         }
 
 

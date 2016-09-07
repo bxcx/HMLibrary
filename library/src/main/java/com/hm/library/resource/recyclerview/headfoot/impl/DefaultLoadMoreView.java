@@ -3,7 +3,6 @@ package com.hm.library.resource.recyclerview.headfoot.impl;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -74,7 +73,8 @@ public class DefaultLoadMoreView extends LoadMoreView {
                 progressBar.setVisibility(GONE);
                 break;
             case STATE_EMPTY_RELOAD:
-                textView.setText(R.string.loadmore_state_ready);
+                textView.setText("");
+//                textView.setText(R.string.loadmore_state_empty_reload);
                 progressBar.setVisibility(GONE);
                 break;
         }

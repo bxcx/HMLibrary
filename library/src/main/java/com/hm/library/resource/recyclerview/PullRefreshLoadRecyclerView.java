@@ -8,10 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.hm.library.R;
 import com.hm.library.resource.recyclerview.headfoot.LoadMoreView;
 import com.hm.library.resource.recyclerview.headfoot.RefreshView;
 import com.hm.library.resource.recyclerview.headfoot.impl.DefaultLoadMoreView;
@@ -22,6 +25,7 @@ import com.hm.library.resource.recyclerview.overscroll.OverScrollLinearLayoutMan
 
 
 public class PullRefreshLoadRecyclerView extends FrameLayout implements RefreshView.StateListener, LoadMoreView.StateListener {
+    TextView textView;
     WrapRecyclerView recyclerView;
     LoadMoreView loadMoreView;
     RefreshView refreshView;
@@ -59,9 +63,25 @@ public class PullRefreshLoadRecyclerView extends FrameLayout implements RefreshV
     private void init() {
         recyclerView = new InnerRecyclerView(getContext());
         recyclerView.setLayoutManager(new OverScrollLinearLayoutManager(recyclerView));
+
+        textView = new TextView(getContext());
+        textView.setBackground(recyclerView.getBackground());
+        textView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (loadMoreView != null) {
+                        loadMoreView.setState(LoadMoreView.STATE_LOADING);
+                        textView.setVisibility(View.GONE);
+                    }
+                }
+                return true;
+            }
+        });
+        textView.setGravity(Gravity.CENTER);
+        textView.setVisibility(View.GONE);
         addView(recyclerView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-
+        addView(textView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     public void initLoadRefesh(boolean canRefesh, boolean canLoadMore) {
@@ -69,6 +89,20 @@ public class PullRefreshLoadRecyclerView extends FrameLayout implements RefreshV
             setRefreshView(new DefaultRefreshView(getContext()));
         if (canLoadMore)
             setLoadMoreView(new DefaultLoadMoreView(getContext()));
+    }
+
+    public void hideLable() {
+        textView.setVisibility(View.GONE);
+    }
+
+    public void showLabel() {
+        textView.setText(R.string.loadmore_state_empty_reload);
+        textView.setVisibility(View.VISIBLE);
+    }
+
+    public void showLabel(String label) {
+        textView.setText(label);
+        textView.setVisibility(View.VISIBLE);
     }
 
     public void setLoadMoreView(LoadMoreView loadMoreView) {
