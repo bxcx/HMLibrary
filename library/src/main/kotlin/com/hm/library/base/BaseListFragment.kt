@@ -269,10 +269,6 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
         activity?.initUI()
     }
 
-    /**
-     * recycler_view!!.layoutManager = LinearLayoutManager(this)
-     * mAdapter = BaseListAdapter<T, H>(this, recycler_view!!, itemResId, dataList)
-     */
     fun initAdapter() {
         setHeaderView()
         setFootView()
