@@ -24,7 +24,6 @@ import com.hm.library.resource.recyclerview.headfoot.LoadMoreView
 import com.hm.library.resource.recyclerview.headfoot.RefreshView
 import com.hm.library.resource.recyclerview.swipe.ItemSlideHelper
 import com.hm.library.util.ViewBindUtil
-import com.orhanobut.logger.Logger
 import org.jetbrains.anko.find
 import org.jetbrains.anko.internals.AnkoInternals
 import org.jetbrains.anko.support.v4.toast
@@ -174,11 +173,8 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
         mItemTouchHelper?.startDrag(viewHolder)
     }
 
-
     override var layoutResID: Int = -1
     open var itemResID: Int = -1
-
-    protected var item: H? = null
 
     fun getItemView(parent: ViewGroup?): View = LayoutInflater.from(context).inflate(itemResID, parent, false)
 
@@ -203,7 +199,6 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
     var loadMoreView: LoadMoreView? = null
 
     var activity: BaseActivity? = null
-
 
     open var canRefesh: Boolean = true
     open var canLoadmore: Boolean = true
@@ -356,7 +351,6 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
 
         } else {
             if (page == default_pageIndex && (list == null || list.size == 0)) {
-                Logger.e("1")
                 adapter!!.notifyDataSetChanged(ArrayList())
                 recyclerView?.showLabel()
                 loadMoreView?.state = LoadMoreView.STATE_EMPTY_RELOAD
@@ -454,19 +448,16 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
         }
 
         lateinit var baseListFragment: BaseListFragment<T, H>
-        lateinit var baseView: BaseListView<H>
         lateinit var context: Context
-
 
         constructor(baseListFragment: BaseListFragment<T, H>, context: Context) {
             this.baseListFragment = baseListFragment
-            this.baseView = baseListFragment as BaseListView<H>
             this.context = context
         }
 
         override fun getItemCount(): Int = data.size
 
-        override fun onCreateViewHolder(parent: ViewGroup?, position: Int): H = baseView.getView(parent, position)
+        override fun onCreateViewHolder(parent: ViewGroup?, position: Int): H = baseListFragment.getView(parent, position)
 
         override fun onBindViewHolder(holder: H, position: Int) {
             holder.context = context

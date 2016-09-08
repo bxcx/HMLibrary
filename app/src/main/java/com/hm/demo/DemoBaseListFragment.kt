@@ -56,6 +56,7 @@ class DemoBaseListFragment : BaseListFragment<DealModel, DealHolder>() {
         onItemDismiss = { position ->
             showToast("onItemDismiss")
         }
+
     }
 
     //不需要设置下拉刷新\上拉加载更多的事件及逻辑, 只需要一个loadData方法
