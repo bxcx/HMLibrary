@@ -38,9 +38,10 @@ class HMRequest {
 
         open var params: HashMap<String, Any> = HashMap()
         open var header: HashMap<String, String> = HashMap()
+        open var method: Method = Method.POST
 
         //临时解决方案 供java调用
-        fun <T : Any> go(clazz: Class<T>, url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = Method.POST,
+        fun <T : Any> go(clazz: Class<T>, url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = HMRequest.method,
                          header: HashMap<String, String> = HMRequest.header, activity: Activity? = null,
                          cache: Boolean = false, needCallBack: Boolean = false,
                          rsp: OnHMResponse<T>?) {
@@ -134,7 +135,7 @@ class HMRequest {
         //activity 请求所在的Activity, 用于请求失败时给出Toast错误提示 选传 默认为空
         //cache 是否缓存到本地 选传 默认为默认为false
         //needCallBack 请求失败时是否执行回调 选传 默认为false
-        inline fun <reified T : HMModel> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = Method.GET,
+        inline fun <reified T : HMModel> go(url: String = HttpServerPath.Server, params: HashMap<String, Any> = HMRequest.params, method: Method = HMRequest.method,
                                             header: HashMap<String, String> = HMRequest.header, activity: Activity? = null,
                                             cache: Boolean = false, needCallBack: Boolean = false,
                                             crossinline completionHandler: (T?) -> Unit) {

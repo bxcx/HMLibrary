@@ -67,7 +67,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
         if (swipeBack) {
             SwipeBackHelper.onCreate(this)
-            SwipeBackHelper.getCurrentPage(this).setScrimColor(0xff00bb9c.toInt())
+            SwipeBackHelper.getCurrentPage(this).setScrimColor(R.color.colorPrimary)
         }
 //        SwipeBackHelper.getCurrentPage(this)//获取当前页面
 //                .setSwipeBackEnable(true)//设置是否可滑动
