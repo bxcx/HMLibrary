@@ -1,5 +1,6 @@
 package com.hm.library.base
 
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
@@ -144,6 +145,8 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         if (swipeBack)
             SwipeBackHelper.onPostCreate(this)
     }
+
+    override fun getIntent(): Intent = if (super.getIntent() == null) Intent() else super.getIntent()
 
     override fun onResume() {
         super.onResume()

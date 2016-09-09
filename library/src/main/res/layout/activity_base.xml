@@ -6,9 +6,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar"/>
-
     <RelativeLayout
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
