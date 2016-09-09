@@ -53,6 +53,7 @@ abstract class BaseMainActivity : BaseActivity() {
 
     override var layoutResID = -1
     override var swipeBack = false
+    override var hideActionBar = true
 
     //
     var mViewPager: SViewPager? = null

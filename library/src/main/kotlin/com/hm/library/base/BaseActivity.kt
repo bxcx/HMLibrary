@@ -98,8 +98,11 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             loadingProgressView!!.visibility = View.GONE
             frame.addView(loadingProgressView, layoutParams)
 
-            val lp = _contentView.layoutParams as FrameLayout.LayoutParams
-            lp.topMargin = actionBarHeight
+            val clp = _contentView.layoutParams as FrameLayout.LayoutParams
+            clp.topMargin = actionBarHeight
+
+            val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
+            tlp.height = actionBarHeight
         }
 
         if (hideActionBar)
