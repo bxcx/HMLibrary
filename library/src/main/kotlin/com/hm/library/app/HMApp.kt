@@ -25,10 +25,10 @@ open class HMApp : Application() {
         ImageLoader.getInstance().init(config)
 
         Logger.init(packageName)                 // default PRETTYLOGGER or use just init()
-                .setMethodCount(3)                 // default 2
+                .setMethodCount(2)                 // default 2
                 .hideThreadInfo()               // default shown
                 .setLogLevel(LogLevel.FULL)        // default LogLevel.FULL
-                .setMethodOffset(2)                // default 0
+                .setMethodOffset(0)                // default 0
 
         OkHttpUtils.getInstance().setConnectTimeout(2000, TimeUnit.SECONDS)
     }

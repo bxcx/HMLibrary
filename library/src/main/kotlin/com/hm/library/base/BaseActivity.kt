@@ -23,7 +23,6 @@ import com.hm.library.resource.view.CustomToast
 import com.hm.library.resource.view.TipsToast
 import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
-import com.orhanobut.logger.Logger
 import org.jetbrains.anko.onClick
 
 object ActivityData {
@@ -60,18 +59,14 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         setUIParams()
 
         super.onCreate(savedInstanceState)
+
+        val frame = FrameLayout(this)
+
+
         if (layoutResID != -1) {
 //            setContentView(layoutResID)
             val contentView = layoutInflater.inflate(layoutResID, null)
-            loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null)
-            loadingProgressView!!.visibility = View.GONE
-
-            val frame = FrameLayout(this)
-
-
-
             frame.addView(contentView)
-            frame.addView(loadingProgressView)
             setContentView(frame)
         }
 
@@ -79,7 +74,6 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             ViewBindUtil.bindViews(this, window.decorView)
 
         toolbar = findViewById(R.id.toolbar) as Toolbar?
-        Logger.e("$toolbar")
         if (toolbar != null) {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
@@ -91,7 +85,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             }
             val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             layoutParams.topMargin = actionBarHeight
-            loadingProgressView?.layoutParams = layoutParams
+
+            loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null)
+            loadingProgressView!!.visibility = View.GONE
+            frame.addView(loadingProgressView, layoutParams)
         }
 
         if (hideActionBar)
