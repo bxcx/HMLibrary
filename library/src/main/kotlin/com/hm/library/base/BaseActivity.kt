@@ -81,7 +81,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             if (toolbar == null) {
                 toolbar = layoutInflater.inflate(R.layout.toolbar, null) as Toolbar?
             }
-            frame.addView(toolbar)
+            frame.addView(toolbar, ViewGroup.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT))
 
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
