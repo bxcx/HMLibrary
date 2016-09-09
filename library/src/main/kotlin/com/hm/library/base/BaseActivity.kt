@@ -1,5 +1,6 @@
 package com.hm.library.base
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,13 +11,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks
 import com.github.ksoichiro.android.observablescrollview.ScrollState
 import com.github.ksoichiro.android.observablescrollview.Scrollable
 import com.hm.library.R
 import com.hm.library.resource.BaseAppCompatActivity
 import com.hm.library.resource.LoadingDialog
-import com.hm.library.resource.LoadingProgressView
 import com.hm.library.resource.view.CustomToast
 import com.hm.library.resource.view.TipsToast
 import com.hm.library.util.ViewBindUtil
@@ -42,7 +45,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     open var menuRes: Int = -1
 
     protected var toolbar: Toolbar? = null
-    protected var loadingProgressView: LoadingProgressView? = null
+    protected var loadingProgressView: LinearLayout? = null
 
     protected val uiHandler: Handler = Handler()
     var initCompleteRunnable: () -> Unit = {}
@@ -84,7 +87,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             layoutParams.topMargin = actionBarHeight
 
-            loadingProgressView = LoadingProgressView(this)
+            loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null) as LinearLayout?
             loadingProgressView!!.visibility = View.GONE
             frame.addView(loadingProgressView, layoutParams)
         }
@@ -156,7 +159,13 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         if (loadingProgressView == null)
             return
 
-        loadingProgressView?.showLoadProgerss(label)
+        val tv_message = loadingProgressView!!.findViewById(R.id.tv_message) as TextView
+        val iv_progress = loadingProgressView!!.findViewById(R.id.iv_progress) as ImageView
+        val animationDrawable = iv_progress.drawable as AnimationDrawable
+
+        animationDrawable.start()
+        tv_message.text = label
+        loadingProgressView!!.visibility = View.VISIBLE
 
         if (reload) {
             loadingProgressView?.onClick {
@@ -169,7 +178,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     }
 
     fun cancelLoadProgerss() {
-        loadingProgressView?.hidden()
+        loadingProgressView?.visibility = View.GONE
     }
 
     fun hideActionBarByView(view: Scrollable) {

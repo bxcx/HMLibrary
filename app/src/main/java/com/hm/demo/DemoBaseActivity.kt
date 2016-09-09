@@ -23,7 +23,10 @@ class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_ba
 
         tv_hello.text = "Hello!"
 
-        btn_toast.onClick { showToast("Welcome to HMLibrary") }
+        btn_toast.onClick {
+            showToast("Welcome to HMLibrary")
+            showLoadProgerss()
+        }
         btn_tips.onClick { showTips(TipsToast.TipType.Smile, "Thanks for using") }
 
     }
