@@ -1,12 +1,10 @@
 package com.hm.library.base
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import com.hm.library.R
 import com.hm.library.resource.tabindicator.TabPageIndicatorEx
 import com.hm.library.resource.view.SViewPager
-import com.jude.swipbackhelper.SwipeBackHelper
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onPageChangeListener
 import java.util.*
@@ -54,6 +52,7 @@ att:tabUnselectedColor="#a9b7b7"/>/>
 abstract class BaseMainActivity : BaseActivity() {
 
     override var layoutResID = -1
+    override var swipeBack = false
 
     //
     var mViewPager: SViewPager? = null
@@ -62,12 +61,6 @@ abstract class BaseMainActivity : BaseActivity() {
 
     private var mAdapter: FragmentPagerAdapter? = null
     private var isGradualChange: Boolean = false
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false)
-    }
 
     fun initWithParams(viewPager: SViewPager, tabPageIndicator: TabPageIndicatorEx) {
         mViewPager = viewPager

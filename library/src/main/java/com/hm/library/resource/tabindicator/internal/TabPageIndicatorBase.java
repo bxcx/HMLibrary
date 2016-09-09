@@ -14,7 +14,7 @@ public abstract class TabPageIndicatorBase<T extends TabViewBase> extends TabInd
     /**
      * 是否渐变切换
      */
-    protected boolean mIsGradualChange;
+    protected boolean mIsGradualChange = true;
     /**
      * 用于ViewPager会渐变颜色
      */

@@ -53,6 +53,8 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     private var mProgressDialog: LoadingDialog? = null
     private var tipsToast: TipsToast? = null
 
+    lateinit var _contentView: View
+
     open fun setUIParams() {
     }
 
@@ -66,16 +68,21 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
         if (layoutResID != -1) {
 //            setContentView(layoutResID)
-            val contentView = layoutInflater.inflate(layoutResID, null)
-            frame.addView(contentView)
+            _contentView = layoutInflater.inflate(layoutResID, null)
+            frame.addView(_contentView)
             setContentView(frame)
         }
 
         if (needBind)
             ViewBindUtil.bindViews(this, window.decorView)
 
-        toolbar = findViewById(R.id.toolbar) as Toolbar?
-        if (toolbar != null) {
+        if (!hideActionBar) {
+            toolbar = findViewById(R.id.toolbar) as Toolbar?
+            if (toolbar == null) {
+                toolbar = layoutInflater.inflate(R.layout.toolbar, null) as Toolbar?
+            }
+            frame.addView(toolbar)
+
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
 
@@ -90,6 +97,9 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null) as LinearLayout?
             loadingProgressView!!.visibility = View.GONE
             frame.addView(loadingProgressView, layoutParams)
+
+            val lp = _contentView.layoutParams as FrameLayout.LayoutParams
+            lp.topMargin = actionBarHeight
         }
 
         if (hideActionBar)
