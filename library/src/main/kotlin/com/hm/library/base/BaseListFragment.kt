@@ -370,7 +370,7 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
 
     val listParams: HashMap<String, Any>
         get() {
-            var params = HMRequest.params
+            var params = HMRequest.params.clone() as HashMap<String, Any>
             if (canLoadmore && canRefesh) {
                 params.put(default_params_page, page)
                 params.put(default_params_pageSize, default_pageSize)
