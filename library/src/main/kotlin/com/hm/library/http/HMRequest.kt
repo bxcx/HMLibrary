@@ -5,6 +5,7 @@ import android.app.Activity
 import com.google.gson.Gson
 import com.hm.hmlibrary.HttpServerPath
 import com.hm.library.app.Cacher
+import com.hm.library.base.BaseActivity
 import com.orhanobut.logger.Logger
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.Callback
@@ -193,6 +194,9 @@ class HMRequest {
 
                     Logger.e("${Date()}\n$method\n$fullUrl\n${e.message}")
                     activity?.toast(domain)
+                    if (activity != null && activity is BaseActivity) {
+                        activity.cancelLoading()
+                    }
 
                     //失败时，如果调用者要求必须回调，则返回一个null，否则不会触发
                     //多用于上拉加载请求失败时page需要不变

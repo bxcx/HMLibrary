@@ -1,11 +1,18 @@
 package com.hm.library.base
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.Toolbar
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks
 import com.github.ksoichiro.android.observablescrollview.ScrollState
 import com.github.ksoichiro.android.observablescrollview.Scrollable
@@ -16,6 +23,8 @@ import com.hm.library.resource.view.CustomToast
 import com.hm.library.resource.view.TipsToast
 import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
+import com.orhanobut.logger.Logger
+import org.jetbrains.anko.onClick
 
 object ActivityData {
     val URL = "URL"
@@ -36,6 +45,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     open var menuRes: Int = -1
 
     protected var toolbar: Toolbar? = null
+    protected var loadingProgressView: View? = null
 
     protected val uiHandler: Handler = Handler()
     var initCompleteRunnable: () -> Unit = {}
@@ -50,16 +60,38 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         setUIParams()
 
         super.onCreate(savedInstanceState)
-        if (layoutResID != -1)
-            setContentView(layoutResID)
+        if (layoutResID != -1) {
+//            setContentView(layoutResID)
+            val contentView = layoutInflater.inflate(layoutResID, null)
+            loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null)
+            loadingProgressView!!.visibility = View.GONE
+
+            val frame = FrameLayout(this)
+
+
+
+            frame.addView(contentView)
+            frame.addView(loadingProgressView)
+            setContentView(frame)
+        }
 
         if (needBind)
             ViewBindUtil.bindViews(this, window.decorView)
 
         toolbar = findViewById(R.id.toolbar) as Toolbar?
+        Logger.e("$toolbar")
         if (toolbar != null) {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
+
+            var actionBarHeight = 0
+            val tv = TypedValue()
+            if (theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+                actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
+            }
+            val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            layoutParams.topMargin = actionBarHeight
+            loadingProgressView?.layoutParams = layoutParams
         }
 
         if (hideActionBar)
@@ -123,6 +155,32 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     override fun setTitle(title: CharSequence?) {
         super.setTitle(title)
         toolbar?.title = title
+    }
+
+    fun showLoadProgerss(reload: Boolean = false, label: CharSequence = "加载中") {
+        if (loadingProgressView == null)
+            return
+        val iv_progress = loadingProgressView?.findViewById(R.id.iv_progress) as ImageView
+        val animationDrawable = iv_progress.drawable as AnimationDrawable
+        animationDrawable.start()
+
+        val tv_message = loadingProgressView?.findViewById(R.id.tv_message) as TextView
+        tv_message.text = label
+
+        loadingProgressView?.visibility = View.VISIBLE
+
+        if (reload) {
+            loadingProgressView?.onClick {
+                showLoadProgerss(reload, label)
+                loadData()
+            }
+        } else {
+            loadingProgressView?.setOnClickListener(null)
+        }
+    }
+
+    fun cancelLoadProgerss() {
+        loadingProgressView?.visibility = View.GONE
     }
 
     fun hideActionBarByView(view: Scrollable) {
