@@ -20,6 +20,7 @@ import java.util.*
 abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity(), BaseListView<H> {
 
     override var layoutResID = R.layout.activity_base
+    override var autoLoad = false
     open var itemResID: Int = -1
 
     open var canRefesh: Boolean = true
@@ -71,11 +72,6 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
         adapter = fragment!!.adapter!!
         loadData()
         initComplete()
-    }
-
-
-    override fun checkParams(): Boolean {
-        return false
     }
 
     open fun setHeaderView() {

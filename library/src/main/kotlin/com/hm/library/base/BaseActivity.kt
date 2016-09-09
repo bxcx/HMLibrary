@@ -1,6 +1,5 @@
 package com.hm.library.base
 
-import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
@@ -39,6 +38,7 @@ object ActivityData {
 abstract class BaseActivity : BaseAppCompatActivity() {
 
     open var layoutResID: Int = -1
+    open var autoLoad: Boolean = true
     open var needBind: Boolean = false
     open var hideActionBar: Boolean = false
     open var displayHome: Boolean = true
@@ -135,7 +135,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 //                    }
 //                })
 
-        if (checkParams()) {
+        if (autoLoad && checkParams()) {
             loadData()
         }
     }
@@ -146,7 +146,13 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             SwipeBackHelper.onPostCreate(this)
     }
 
-    override fun getIntent(): Intent = if (super.getIntent() == null) Intent() else super.getIntent()
+    val extras: Bundle
+        get() {
+            if (intent.extras == null)
+                return Bundle()
+            else
+                return intent.extras
+        }
 
     override fun onResume() {
         super.onResume()
