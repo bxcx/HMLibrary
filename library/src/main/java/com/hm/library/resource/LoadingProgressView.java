@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hm.library.R;
-
 /**
  * LoadingProgressView
  * <p/>
@@ -44,8 +42,8 @@ public class LoadingProgressView extends FrameLayout {
         iv_progress = new ImageView(getContext());
         iv_progress.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         iv_progress.setScaleType(ImageView.ScaleType.FIT_XY);
-        iv_progress.setImageResource(R.drawable.anim_loading_xml);
-        animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
+//        iv_progress.setImageResource(R.);
+        //        iv_progress.setImageResource(R.drawable.anim_loading_xml);
 
         tv_message = new TextView(getContext());
         tv_message.setTextSize(16);
@@ -59,7 +57,9 @@ public class LoadingProgressView extends FrameLayout {
         addView(loadingProgressView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
     }
 
-    public void showLoadProgerss(CharSequence label) {
+    public void showLoadProgerss(CharSequence label, int anim) {
+        iv_progress.setImageResource(anim);
+        animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
         animationDrawable.start();
         tv_message.setText(label);
         setVisibility(View.VISIBLE);

@@ -156,7 +156,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         if (loadingProgressView == null)
             return
 
-        loadingProgressView?.showLoadProgerss(label)
+        loadingProgressView?.showLoadProgerss(label, R.drawable.anim_loading_xml)
 
         if (reload) {
             loadingProgressView?.onClick {
