@@ -157,11 +157,12 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     fun showLoadProgerss(reload: Boolean = false, label: CharSequence = "加载中") {
         if (loadingProgressView == null)
             return
-        val iv_progress = loadingProgressView?.findViewById(R.id.iv_progress) as ImageView
-        val animationDrawable = iv_progress.drawable as AnimationDrawable
+        val viewGroup = loadingProgressView as ViewGroup
+        var iv_progress = viewGroup.getChildAt(0) as ImageView
+        var animationDrawable = iv_progress.drawable as AnimationDrawable
         animationDrawable.start()
 
-        val tv_message = loadingProgressView?.findViewById(R.id.tv_message) as TextView
+        var tv_message = viewGroup.getChildAt(1) as TextView
         tv_message.text = label
 
         loadingProgressView?.visibility = View.VISIBLE
