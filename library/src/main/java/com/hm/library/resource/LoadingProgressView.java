@@ -3,9 +3,7 @@ package com.hm.library.resource;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +42,7 @@ public class LoadingProgressView extends FrameLayout {
 
     public void init() {
         iv_progress = new ImageView(getContext());
-        iv_progress.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        iv_progress.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         iv_progress.setScaleType(ImageView.ScaleType.FIT_XY);
         iv_progress.setImageResource(R.drawable.anim_loading_xml);
         animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
