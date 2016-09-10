@@ -30,6 +30,7 @@ object ActivityData {
     val URL = "URL"
     val TITLE = "TITLE"
     val ID = "ID"
+    val OBJ = "OBJ"
 }
 
 /**
@@ -164,6 +165,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     override fun finish() {
         super.finish()
+    }
+
+    fun finish(delayMillis: Long = 0) {
+        runDelayed({ super.finish() }, delayMillis)
     }
 
     override fun onDestroy() {

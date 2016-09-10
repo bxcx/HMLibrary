@@ -335,6 +335,8 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
             loadMoreView?.state = LoadMoreView.STATE_NORMAL
         }
 
+        recyclerView?.hideLable()
+
         //list为nil时表示请求失败，需要page--
         if (list != null && list.size > 0) {
             for (data in list) {
