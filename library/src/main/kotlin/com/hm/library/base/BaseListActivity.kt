@@ -62,8 +62,10 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
 
         FragmentUtil.replace(supportFragmentManager, R.id.layout_content, fragment!!, false, false)
 
-        fragment!!.initCompleteRunnable = {
-            onViewCreated()
+        if (checkParams()) {
+            fragment!!.initCompleteRunnable = {
+                onViewCreated()
+            }
         }
     }
 
