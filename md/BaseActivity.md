@@ -42,7 +42,8 @@ cond(no)->finish->onDestroy
 
         override fun setUIParams() {
             layoutResID = R.layout.activity_main    //activity布局id
-            menuRes = R.menu.menu_save              //toolBar的MenuID
+            autoLoad = true                         //默认自动调用loadData
+            menuResID = R.menu.menu_save            //toolBar的MenuID
             needBind = false                        //是否需要bindView,默认为false,java类需要设置为true,kotlin类不需要
             swipeBack = true                        //是否开启手势右滑返回,默认为true
             hideActionBar = false                   //是否隐藏toolBar,默认为false
