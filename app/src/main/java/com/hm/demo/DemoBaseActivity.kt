@@ -10,7 +10,7 @@ class DemoBaseActivity(override var layoutResID: Int = R.layout.activity_demo_ba
 
     override fun setUIParams() {
         layoutResID = R.layout.activity_demo_base_activity    //activity布局id
-        menuRes = R.menu.menu_save              //toolBar的MenuID
+        menuResID = R.menu.menu_save              //toolBar的MenuID
         needBind = false                        //是否需要bindView,默认为false,java类需要设置为true,kotlin类不需要
 
         swipeBack = true                        //是否开启手势右滑返回,默认为true

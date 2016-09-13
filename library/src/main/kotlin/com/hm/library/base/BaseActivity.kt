@@ -26,7 +26,7 @@ import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
 import org.jetbrains.anko.onClick
 
-object ActivityData {
+object IntentData {
     val URL = "URL"
     val TITLE = "TITLE"
     val ID = "ID"
@@ -44,7 +44,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     open var hideActionBar: Boolean = false
     open var displayHome: Boolean = true
     open var swipeBack: Boolean = true
-    open var menuRes: Int = -1
+    open var menuResID: Int = -1
 
     protected var toolbar: Toolbar? = null
     protected var loadingProgressView: LinearLayout? = null
@@ -67,9 +67,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
         val frame = FrameLayout(this)
 
-
         if (layoutResID != -1) {
-//            setContentView(layoutResID)
             _contentView = layoutInflater.inflate(layoutResID, null)
             frame.addView(_contentView)
             setContentView(frame)
@@ -234,10 +232,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (menuRes == -1)
+        if (menuResID == -1)
             return super.onCreateOptionsMenu(menu)
         else {
-            menuInflater.inflate(menuRes, menu)
+            menuInflater.inflate(menuResID, menu)
             return true
         }
 
