@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/bxcx/HMLibrary.svg)](https://jitpack.io/#bxcx/HMLibrary)
 # README
 
 tags： HMLibrary
