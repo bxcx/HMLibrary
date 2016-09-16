@@ -26,13 +26,6 @@ import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
 import org.jetbrains.anko.onClick
 
-object IntentData {
-    val URL = "URL"
-    val TITLE = "TITLE"
-    val ID = "ID"
-    val OBJ = "OBJ"
-}
-
 /**
  * Created by himi on 16/3/1.
  */

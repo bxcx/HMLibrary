@@ -7,6 +7,8 @@ package com.hm.library.util
  * version V1.0
  */
 object ArgumentUtil {
-    val Arg_ID = "Arg_ID"
-    val Arg_Name = "Arg_Name"
+    val URL = "URL"
+    val TITLE = "TITLE"
+    val ID = "ID"
+    val OBJ = "OBJ"
 }
