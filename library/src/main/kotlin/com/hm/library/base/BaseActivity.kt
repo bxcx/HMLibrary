@@ -79,8 +79,6 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
-
-
         }
 
         if (hideActionBar)
@@ -93,14 +91,14 @@ abstract class BaseActivity : BaseAppCompatActivity() {
                 actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
             }
             val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            layoutParams.topMargin = actionBarHeight
+            layoutParams.topMargin = if (toolbar != null) actionBarHeight else 0
 
             loadingProgressView = layoutInflater.inflate(R.layout.include_progress_view, null) as LinearLayout?
             loadingProgressView!!.visibility = View.GONE
             frame.addView(loadingProgressView, layoutParams)
 
             val clp = _contentView.layoutParams as FrameLayout.LayoutParams
-            clp.topMargin = actionBarHeight
+            clp.topMargin = if (toolbar != null) actionBarHeight else 0
 
             if (toolbar != null) {
                 val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
