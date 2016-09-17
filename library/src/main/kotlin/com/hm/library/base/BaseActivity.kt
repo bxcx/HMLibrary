@@ -102,8 +102,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             val clp = _contentView.layoutParams as FrameLayout.LayoutParams
             clp.topMargin = actionBarHeight
 
-            val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
-            tlp.height = actionBarHeight
+            if (toolbar != null) {
+                val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
+                tlp.height = actionBarHeight
+            }
         }
 
         if (swipeBack) {
