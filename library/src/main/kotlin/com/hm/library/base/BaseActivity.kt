@@ -33,6 +33,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     open var layoutResID: Int = -1
     open var autoLoad: Boolean = true
+    open var autoLayout: Boolean = true
     open var needBind: Boolean = false
     open var hideActionBar: Boolean = false
     open var displayHome: Boolean = true
@@ -79,6 +80,13 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(displayHome)
 
+
+        }
+
+        if (hideActionBar)
+            supportActionBar?.hide()
+
+        if (autoLayout) {
             var actionBarHeight = 0
             val tv = TypedValue()
             if (theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
@@ -97,9 +105,6 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
             tlp.height = actionBarHeight
         }
-
-        if (hideActionBar)
-            supportActionBar?.hide()
 
         if (swipeBack) {
             SwipeBackHelper.onCreate(this)
