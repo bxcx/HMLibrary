@@ -216,14 +216,17 @@ abstract class BaseActivity : BaseAppCompatActivity() {
                 if (supportActionBar == null)
                     return
 
-                if (scrollState == ScrollState.UP) {
-                    if (supportActionBar!!.isShowing) {
-                        supportActionBar?.hide()
+                try {
+                    if (scrollState == ScrollState.UP) {
+                        if (supportActionBar!!.isShowing) {
+                            supportActionBar?.hide()
+                        }
+                    } else if (scrollState == ScrollState.DOWN) {
+                        if (!supportActionBar!!.isShowing) {
+                            supportActionBar?.show()
+                        }
                     }
-                } else if (scrollState == ScrollState.DOWN) {
-                    if (!supportActionBar!!.isShowing) {
-                        supportActionBar?.show()
-                    }
+                } catch(e: Exception) {
                 }
             }
         })
