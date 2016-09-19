@@ -26,7 +26,6 @@ import com.hm.library.resource.recyclerview.swipe.ItemSlideHelper
 import com.hm.library.util.ViewBindUtil
 import org.jetbrains.anko.find
 import org.jetbrains.anko.internals.AnkoInternals
-import org.jetbrains.anko.support.v4.toast
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -354,11 +353,10 @@ abstract class BaseListFragment<T : Any, H : BaseViewHolder<T>> : BaseFragment()
                 loadMoreView?.state = LoadMoreView.STATE_EMPTY_RELOAD
             } else {
                 if (action == LoadAction.LoadMore) {
-                    if (page > 2)
-                        toast("没有更多啦")
+//                    if (page > 2)
+//                        toast("没有更多啦")
                     loadMoreView?.state = LoadMoreView.STATE_NO_MORE
-                }
-                if (list == null) {
+                } else if (list == null) {
                     loadMoreView?.state = LoadMoreView.STATE_LOAD_FAIL
                 }
             }

@@ -46,23 +46,22 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
         setListParams()
 
         super.onCreate(savedInstanceState)
-
-        if (fragment == null) {
-            fragment = BLF<T, H>()
-            fragment!!.activity = this
-            fragment!!.canRefesh = canRefesh
-            fragment!!.canLoadmore = canLoadmore
-            fragment!!.canDrag = canDrag
-            fragment!!.canSwipe = canSwipe
-            fragment!!.swipeType = swipeType
-            fragment!!.itemResID = itemResID
-            fragment!!.list_activity = this
-            fragment!!.row = row
-        }
-
-        FragmentUtil.replace(supportFragmentManager, R.id.layout_content, fragment!!, false, false)
-
         if (checkParams()) {
+            if (fragment == null) {
+                fragment = BLF<T, H>()
+                fragment!!.activity = this
+                fragment!!.canRefesh = canRefesh
+                fragment!!.canLoadmore = canLoadmore
+                fragment!!.canDrag = canDrag
+                fragment!!.canSwipe = canSwipe
+                fragment!!.swipeType = swipeType
+                fragment!!.itemResID = itemResID
+                fragment!!.list_activity = this
+                fragment!!.row = row
+            }
+
+            FragmentUtil.replace(supportFragmentManager, R.id.layout_content, fragment!!, false, false)
+
             fragment!!.initCompleteRunnable = {
                 onViewCreated()
             }
