@@ -45,8 +45,8 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         setListParams()
 
-        super.onCreate(savedInstanceState)
         if (checkParams()) {
+            super.onCreate(savedInstanceState)
             if (fragment == null) {
                 fragment = BLF<T, H>()
                 fragment!!.activity = this
