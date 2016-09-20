@@ -22,6 +22,7 @@ import com.hm.library.resource.BaseAppCompatActivity
 import com.hm.library.resource.LoadingDialog
 import com.hm.library.resource.view.CustomToast
 import com.hm.library.resource.view.TipsToast
+import com.hm.library.util.ImmersedStatusbarUtils
 import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
 import org.jetbrains.anko.onClick
@@ -36,6 +37,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     open var autoLayout: Boolean = true
     open var needBind: Boolean = false
     open var hideActionBar: Boolean = false
+    open var immersedStatusbar: Boolean = false
     open var displayHome: Boolean = true
     open var swipeBack: Boolean = true
     open var menuResID: Int = -1
@@ -104,6 +106,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
                 val tlp = toolbar!!.layoutParams as FrameLayout.LayoutParams
                 tlp.height = actionBarHeight
             }
+        }
+
+        if(immersedStatusbar){
+            ImmersedStatusbarUtils.initAfterSetContentView(this, _contentView)
         }
 
         if (swipeBack) {
@@ -202,6 +208,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     fun cancelLoadProgerss() {
         loadingProgressView?.visibility = View.GONE
+    }
+
+    fun fullScreen(){
+        ImmersedStatusbarUtils.initAfterSetContentView(this, _contentView)
     }
 
     fun hideActionBarByView(view: Scrollable) {
