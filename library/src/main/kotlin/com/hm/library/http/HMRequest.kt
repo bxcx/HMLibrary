@@ -274,6 +274,9 @@ class HMRequest {
                 check = response.valid
                 if (!check) {
                     activity?.toast(response.message)
+                    if (activity != null && activity is BaseActivity) {
+                        activity.cancelLoading()
+                    }
                 }
             }
             return check
