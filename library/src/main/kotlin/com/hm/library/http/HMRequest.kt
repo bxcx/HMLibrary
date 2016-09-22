@@ -21,8 +21,8 @@ import java.util.*
  * 数据模型的基类，所有网络实体对象都要继承此类
  */
 abstract class HMModel() {
-    abstract var valid: Boolean
-    abstract var message: String
+    abstract var hm_valid: Boolean
+    abstract var hm_message: String
 }
 
 interface OnHMResponse<T> {
@@ -271,9 +271,9 @@ class HMRequest {
         fun <T> checkResult(response: T, activity: Activity?): Boolean {
             var check: Boolean = false
             if (response is HMModel) {
-                check = response.valid
+                check = response.hm_valid
                 if (!check) {
-                    activity?.toast(response.message)
+                    activity?.toast(response.hm_message)
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()
                     }
