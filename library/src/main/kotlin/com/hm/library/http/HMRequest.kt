@@ -41,6 +41,17 @@ class HMRequest {
         open var method: Method = Method.POST
         open var server: String = ""
 
+        open fun parseError(e: Exception): String {
+            var domain = when (e) {
+                is ConnectException,
+                is UnknownHostException
+                -> "网络不佳"
+                else -> "未知错误"
+            }
+
+            return domain
+        }
+
         //临时解决方案 供java调用
         fun <T : Any> go(clazz: Class<T>, url: String = HMRequest.server, params: HashMap<String, Any> = HMRequest.params, method: Method = HMRequest.method,
                          header: HashMap<String, String> = HMRequest.header, activity: Activity? = null,
@@ -92,15 +103,22 @@ class HMRequest {
                 }
 
                 override fun onError(call: Call, e: Exception) {
-                    var domain = when (e) {
-                        is ConnectException,
-                        is UnknownHostException
-                        -> "网络不佳"
-                        else -> "未知错误"
+
+                    try {
+                        val obj: T? = Gson().fromJson(e.message, clazz)
+                        if (obj != null) {
+                            onResponse(obj)
+                            println("onError : ${e.message}")
+                            return
+                        }
+                    } catch(e: Exception) {
                     }
 
                     println(e.message)
-                    activity?.toast(domain)
+                    activity?.toast(parseError(e))
+                    if (activity != null && activity is BaseActivity) {
+                        activity.cancelLoading()
+                    }
 
                     //失败时，如果调用者要求必须回调，则返回一个null，否则不会触发
                     //多用于上拉加载请求失败时page需要不变
@@ -185,15 +203,18 @@ class HMRequest {
                 }
 
                 override fun onError(call: Call, e: Exception) {
-                    val domain = when (e) {
-                        is ConnectException,
-                        is UnknownHostException
-                        -> "网络不佳"
-                        else -> "未知错误"
+                    try {
+                        val obj: T? = Gson().fromJson(e.message, T::class.java)
+                        if (obj != null) {
+                            onResponse(obj)
+                            Logger.e("onError : ${e.message}")
+                            return
+                        }
+                    } catch(e: Exception) {
                     }
 
                     Logger.e("${Date()}\n$method\n$fullUrl\n$e\n${e.message}")
-                    activity?.toast(domain)
+                    activity?.toast(parseError(e))
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()
                     }
