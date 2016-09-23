@@ -33,6 +33,6 @@ open class HMApp : Application() {
                 .setMethodOffset(0)                // default 0
 
         //设置网络请求超时时限
-        OkHttpUtils.getInstance().setConnectTimeout(2000, TimeUnit.SECONDS)
+        OkHttpUtils.getInstance().setConnectTimeout(10, TimeUnit.SECONDS)
     }
 }

@@ -192,7 +192,7 @@ class HMRequest {
                         else -> "未知错误"
                     }
 
-                    Logger.e("${Date()}\n$method\n$fullUrl\n${e.message}")
+                    Logger.e("${Date()}\n$method\n$fullUrl\n$e\n${e.message}")
                     activity?.toast(domain)
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()

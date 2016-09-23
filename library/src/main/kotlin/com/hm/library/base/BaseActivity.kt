@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
@@ -108,7 +109,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
             }
         }
 
-        if(immersedStatusbar){
+        if (immersedStatusbar) {
             ImmersedStatusbarUtils.initAfterSetContentView(this, _contentView)
         }
 
@@ -184,7 +185,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         toolbar?.title = title
     }
 
-    fun showLoadProgerss(reload: Boolean = false, label: CharSequence = "加载中") {
+    fun showLoadProgerss(reload: Boolean = false, label: CharSequence = "") {
         if (loadingProgressView == null)
             return
 
@@ -193,7 +194,12 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         val animationDrawable = iv_progress.drawable as AnimationDrawable
 
         animationDrawable.start()
-        tv_message.text = label
+        if (TextUtils.isEmpty(label)) {
+            tv_message.visibility = View.GONE
+        } else {
+            tv_message.visibility = View.VISIBLE
+            tv_message.text = label
+        }
         loadingProgressView!!.visibility = View.VISIBLE
 
         if (reload) {
@@ -210,7 +216,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         loadingProgressView?.visibility = View.GONE
     }
 
-    fun fullScreen(){
+    fun fullScreen() {
         ImmersedStatusbarUtils.initAfterSetContentView(this, _contentView)
     }
 
