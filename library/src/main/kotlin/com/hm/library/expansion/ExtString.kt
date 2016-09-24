@@ -1,5 +1,6 @@
 package com.hm.library.expansion
 
+import android.text.Editable
 import java.util.regex.Pattern
 
 /**
@@ -18,3 +19,12 @@ val String.isEmail: Boolean
         val matcher = regex.matcher(this)
         return matcher.matches()
     }
+
+fun String.length(min: Int, max: Int): Boolean
+        = this.length >= min && this.length <= max
+
+val Editable.isEmail: Boolean
+    get() = this.toString().isEmail
+
+fun Editable.length(min: Int, max: Int): Boolean
+        = this.toString().length(min, max)
