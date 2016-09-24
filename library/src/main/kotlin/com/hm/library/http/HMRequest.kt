@@ -29,19 +29,25 @@ interface OnHMResponse<T> {
     fun onResponse(obj: T?)
 }
 
+interface HMExceptionInfo {
+    fun parseError(e: Exception): String
+}
+
 /**
  * 网络请求类
  */
 class HMRequest {
 
-    companion object {
+    companion object : HMExceptionInfo {
 
         open var params: HashMap<String, Any> = HashMap()
         open var header: HashMap<String, String> = HashMap()
         open var method: Method = Method.POST
         open var server: String = ""
 
-        open fun parseError(e: Exception): String {
+        open var parse: HMExceptionInfo = this
+
+        override fun parseError(e: Exception): String {
             var domain = when (e) {
                 is ConnectException,
                 is UnknownHostException
@@ -115,7 +121,7 @@ class HMRequest {
                     }
 
                     println(e.message)
-                    activity?.toast(parseError(e))
+                    activity?.toast(parse.parseError(e))
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()
                     }
@@ -214,7 +220,7 @@ class HMRequest {
                     }
 
                     Logger.e("${Date()}\n$method\n$fullUrl\n$e\n${e.message}")
-                    activity?.toast(parseError(e))
+                    activity?.toast(parse.parseError(e))
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()
                     }
