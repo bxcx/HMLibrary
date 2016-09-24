@@ -28,3 +28,6 @@ val Editable.isEmail: Boolean
 
 fun Editable.length(min: Int, max: Int): Boolean
         = this.toString().length(min, max)
+
+fun Editable.matches(editable: Editable): Boolean
+        = this.toString().equals(editable.toString())
