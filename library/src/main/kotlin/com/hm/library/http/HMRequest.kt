@@ -31,6 +31,7 @@ interface OnHMResponse<T> {
 
 interface HMExceptionInfo {
     fun parseError(e: Exception): String
+    fun onError(message: String)
 }
 
 /**
@@ -39,6 +40,7 @@ interface HMExceptionInfo {
 class HMRequest {
 
     companion object : HMExceptionInfo {
+
 
         open var params: HashMap<String, Any> = HashMap()
         open var header: HashMap<String, String> = HashMap()
@@ -56,6 +58,9 @@ class HMRequest {
             }
 
             return domain
+        }
+
+        override fun onError(message: String) {
         }
 
         //临时解决方案 供java调用
@@ -300,6 +305,7 @@ class HMRequest {
             if (response is HMModel) {
                 check = response.hm_valid
                 if (!check) {
+                    parse.onError(response.hm_message)
                     activity?.toast(response.hm_message)
                     if (activity != null && activity is BaseActivity) {
                         activity.cancelLoading()
