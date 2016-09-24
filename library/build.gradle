@@ -52,9 +52,10 @@ dependencies {
     //https://github.com/Clans/FloatingActionButton
     //compile 'com.github.clans:fab:1.6.2'
 
-    //Material Design https://github.com/vajro/MaterialDesignLibrary
-    //https://github.com/navasmdc/MaterialDesignLibrary
-    compile 'com.github.vajro:MaterialDesignLibrary:1.6'
+    //Material Design https://github.com/vajro/MaterialDesignLibrary //不兼容
+    //https://github.com/navasmdc/MaterialDesignLibrary compile 'com.github.vajro:MaterialDesignLibrary:1.6' //button 有bug
+    //https://github.com/rey5137/material
+    compile 'com.github.rey5137:material:1.2.4'
 
     //AndroidSweetSheet https://github.com/zzz40500/AndroidSweetSheet
     compile 'com.github.zzz40500:AndroidSweetSheet:1.1.0'
@@ -69,7 +70,6 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5+'
     //Log日志 https://github.com/orhanobut/logger
     compile 'com.orhanobut:logger:1.11+'
-
 
     //RecyclerView https://github.com/jdsjlzx/LRecyclerView
     //compile 'com.github.jdsjlzx:LRecyclerView:1.0.8'
