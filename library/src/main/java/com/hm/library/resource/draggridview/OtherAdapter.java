@@ -19,14 +19,20 @@ public class OtherAdapter extends BaseAdapter {
     private Context context;
     public List<String> channelList;
     private TextView item_text;
-    /** 是否可见 在移动动画完毕之前不可见，动画完毕后可见*/
+    /**
+     * 是否可见 在移动动画完毕之前不可见，动画完毕后可见
+     */
     boolean isVisible = true;
-    /** 要删除的position */
+    /**
+     * 要删除的position
+     */
     public int remove_position = -1;
-    /** 是否是用户频道 */
+    /**
+     * 是否是用户频道
+     */
     private boolean isUser = false;
 
-    public OtherAdapter(Context context, List<String> channelList , boolean isUser) {
+    public OtherAdapter(Context context, List<String> channelList, boolean isUser) {
         this.context = context;
         this.channelList = channelList;
         this.isUser = isUser;
@@ -56,57 +62,74 @@ public class OtherAdapter extends BaseAdapter {
         item_text = (TextView) view.findViewById(R.id.text_item);
         String channel = getItem(position);
         item_text.setText(channel);
-        if(isUser){
-            if ((position == 0) || (position == 1)){
+        if (isUser) {
+            if ((position == 0) || (position == 1)) {
                 item_text.setEnabled(false);
             }
         }
-        if (!isVisible && (position == -1 + channelList.size())){
+        if (!isVisible && (position == -1 + channelList.size())) {
             item_text.setText("");
             item_text.setSelected(true);
             item_text.setEnabled(true);
         }
-        if(remove_position == position){
+        if (remove_position == position) {
             item_text.setText("");
         }
         return view;
     }
 
-    /** 获取频道列表 */
+    /**
+     * 获取频道列表
+     */
     public List<String> getChannnelLst() {
         return channelList;
     }
 
-    /** 添加频道列表 */
+    /**
+     * 添加频道列表
+     */
     public void addItem(String channel) {
         channelList.add(channel);
         notifyDataSetChanged();
     }
 
-    /** 设置删除的position */
+    /**
+     * 设置删除的position
+     */
     public void setRemove(int position) {
         remove_position = position;
         notifyDataSetChanged();
         // notifyDataSetChanged();
     }
 
-    /** 删除频道列表 */
+    /**
+     * 删除频道列表
+     */
     public void remove() {
+        if (remove_position == -1)
+            return;
         channelList.remove(remove_position);
         remove_position = -1;
         notifyDataSetChanged();
     }
-    /** 设置频道列表 */
+
+    /**
+     * 设置频道列表
+     */
     public void setListDate(List<String> list) {
         channelList = list;
     }
 
-    /** 获取是否可见 */
+    /**
+     * 获取是否可见
+     */
     public boolean isVisible() {
         return isVisible;
     }
 
-    /** 设置是否可见 */
+    /**
+     * 设置是否可见
+     */
     public void setVisible(boolean visible) {
         isVisible = visible;
     }
