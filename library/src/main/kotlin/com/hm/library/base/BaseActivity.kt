@@ -28,6 +28,15 @@ import com.hm.library.util.ViewBindUtil
 import com.jude.swipbackhelper.SwipeBackHelper
 import org.jetbrains.anko.onClick
 
+interface OnActivityResponse {
+    fun onCreate(activity: BaseActivity, savedInstanceState: Bundle?)
+    fun onPostCreate(activity: BaseActivity, savedInstanceState: Bundle?)
+    fun onResume(activity: BaseActivity)
+    fun onPause(activity: BaseActivity)
+    fun finish(activity: BaseActivity)
+    fun onDestroy(activity: BaseActivity)
+}
+
 /**
  * Created by himi on 16/3/1.
  */
@@ -54,6 +63,10 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     lateinit var _contentView: View
 
+    companion object {
+        var onActivityResponse: OnActivityResponse? = null
+    }
+
     open fun setUIParams() {
     }
 
@@ -61,6 +74,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
         setUIParams()
 
         super.onCreate(savedInstanceState)
+        onActivityResponse?.onCreate(this, savedInstanceState)
 
         val frame = FrameLayout(this)
 
@@ -146,6 +160,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
+        onActivityResponse?.onPostCreate(this, savedInstanceState)
         if (swipeBack)
             SwipeBackHelper.onPostCreate(this)
     }
@@ -160,14 +175,17 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        onActivityResponse?.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
+        onActivityResponse?.onPause(this)
     }
 
     override fun finish() {
         super.finish()
+        onActivityResponse?.finish(this)
     }
 
     fun finish(delayMillis: Long = 0) {
@@ -176,6 +194,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        onActivityResponse?.onDestroy(this)
         if (swipeBack)
             SwipeBackHelper.onDestroy(this)
     }

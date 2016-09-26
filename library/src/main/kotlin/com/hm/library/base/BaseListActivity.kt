@@ -37,13 +37,10 @@ abstract class BaseListActivity<T : Any, H : BaseViewHolder<T>> : BaseActivity()
 
     protected var item: H? = null
 
-    open fun setListParams() {
-    }
 
     fun getItemView(parent: ViewGroup?): View = LayoutInflater.from(this).inflate(itemResID, parent, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setListParams()
         super.onCreate(savedInstanceState)
 
         if (checkParams()) {
