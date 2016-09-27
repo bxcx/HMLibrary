@@ -257,7 +257,7 @@ class HMRequest {
             })
         }
 
-        fun download(url: String, path: String, fileName: String, deleteIfExist: Boolean = false, activity: Activity? = null, completionHandler: (Float?) -> Unit) {
+        fun download(url: String, path: String, fileName: String, deleteIfExist: Boolean = false, showToastonResponse: Boolean = true, activity: Activity? = null, completionHandler: (Float?, File?) -> Unit) {
             if (!File(path).exists())
                 File(path).mkdirs()
             if (deleteIfExist) {
@@ -270,16 +270,23 @@ class HMRequest {
                     {
                         override fun onResponse(response: File?) {
 //                            Logger.i("下载成功,保存在" + response?.absolutePath)
-//                            activity?.toast("下载成功,保存在" + response?.absolutePath)
-//                            completionHandler?.invoke(1f)
+                            if (activity != null && activity is BaseActivity) {
+                                activity.cancelLoading()
+                            }
+                            if (showToastonResponse)
+                                activity?.toast("下载成功,保存在" + response?.absolutePath)
+                            completionHandler.invoke(1f, response)
                         }
 
                         override fun onError(call: Call?, e: Exception?) {
                             activity?.toast(e?.message.toString())
+                            if (activity != null && activity is BaseActivity) {
+                                activity.cancelLoading()
+                            }
                         }
 
                         override fun inProgress(progress: Float) {
-                            completionHandler.invoke(progress)
+                            completionHandler.invoke(progress, null)
                         }
 
                     })
