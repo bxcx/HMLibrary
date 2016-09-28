@@ -257,7 +257,7 @@ class HMRequest {
             })
         }
 
-        fun download(url: String, path: String, fileName: String, deleteIfExist: Boolean = false, showToastonResponse: Boolean = true, activity: Activity? = null, completionHandler: (Float?, File?) -> Unit) {
+        fun download(url: String, path: String, fileName: String, deleteIfExist: Boolean = false, showToastonResponse: Boolean = true, activity: Activity? = null, needCallBack: Boolean = false, completionHandler: (Float?, File?) -> Unit) {
             if (!File(path).exists())
                 File(path).mkdirs()
             if (deleteIfExist) {
@@ -282,6 +282,9 @@ class HMRequest {
                             activity?.toast(e?.message.toString())
                             if (activity != null && activity is BaseActivity) {
                                 activity.cancelLoading()
+                            }
+                            if (needCallBack) {
+                                completionHandler.invoke(-1f, null)
                             }
                         }
 
