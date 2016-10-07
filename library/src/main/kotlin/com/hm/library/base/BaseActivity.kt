@@ -366,7 +366,7 @@ abstract class BaseActivity : BaseAppCompatActivity() {
     }
 
     fun showTips(iconResId: Int, msgResId: Int) {
-        if (tipsToast != null) {
+        if (tipsToast != null && tipsToast!!.view != null) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 tipsToast?.cancel()
             }
