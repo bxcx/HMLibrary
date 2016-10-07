@@ -1,15 +1,12 @@
 package com.hm.library.resource.sweetsheet.sweetpick;
 
-import android.graphics.Color;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.mingle.SimpleAnimationListener;
-import com.mingle.entity.MenuEntity;
-import com.mingle.sweetpick.*;
+import com.hm.library.resource.sweetsheet.SimpleAnimationListener;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
@@ -30,7 +27,7 @@ public abstract class Delegate implements View.OnClickListener {
     protected ViewGroup mParentVG;
     protected View mRootView;
     private ImageView mBg;
-    private com.mingle.sweetpick.Effect mEffect;
+    private Effect mEffect;
     private boolean mIsBgClickEnable=true;
 
     protected SweetSheet.OnMenuItemClickListener mOnMenuItemClickListener;
@@ -159,7 +156,7 @@ public abstract class Delegate implements View.OnClickListener {
     }
 
 
-    protected void setBackgroundEffect(com.mingle.sweetpick.Effect effect) {
+    protected void setBackgroundEffect(Effect effect) {
         mEffect=effect;
 
     }

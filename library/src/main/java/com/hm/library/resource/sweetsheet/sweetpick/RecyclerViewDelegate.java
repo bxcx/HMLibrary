@@ -9,15 +9,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
 
-import com.mingle.adapter.MenuRVAdapter;
-import com.mingle.entity.MenuEntity;
-
-import com.mingle.sweetpick.*;
-import com.mingle.sweetpick.SweetSheet;
-import com.mingle.sweetsheet.R;
-import com.mingle.widget.CRImageView;
-import com.mingle.widget.FreeGrowUpParentRelativeLayout;
-import com.mingle.widget.SweetView;
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.adapter.MenuRVAdapter;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
+import com.hm.library.resource.sweetsheet.widget.CRImageView;
+import com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout;
+import com.hm.library.resource.sweetsheet.widget.SweetView;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ import java.util.List;
  * @date 2015/8/5.
  * @github: https://github.com/zzz40500
  */
-public class RecyclerViewDelegate extends com.mingle.sweetpick.Delegate {
+public class RecyclerViewDelegate extends Delegate {
 
     private SweetView mSweetView;
     private RecyclerView mRV;
@@ -82,7 +79,7 @@ public class RecyclerViewDelegate extends com.mingle.sweetpick.Delegate {
 
     protected void setMenuList(final List<MenuEntity> menuEntities) {
 
-        mMenuRVAdapter = new MenuRVAdapter(menuEntities, com.mingle.sweetpick.SweetSheet.Type.RecyclerView);
+        mMenuRVAdapter = new MenuRVAdapter(menuEntities, SweetSheet.Type.RecyclerView);
         mRV.setAdapter(mMenuRVAdapter);
         mMenuRVAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -152,7 +149,7 @@ public class RecyclerViewDelegate extends com.mingle.sweetpick.Delegate {
         @Override
         public void onStart() {
             mFreeGrowUpParentRelativeLayout.reset();
-            mStatus = com.mingle.sweetpick.SweetSheet.Status.SHOWING;
+            mStatus = SweetSheet.Status.SHOWING;
             sliderIm.setVisibility(View.INVISIBLE);
             mRV.setVisibility(View.GONE);
         }
@@ -161,7 +158,7 @@ public class RecyclerViewDelegate extends com.mingle.sweetpick.Delegate {
         public void onEnd() {
 
 
-            if(  mStatus== com.mingle.sweetpick.SweetSheet.Status.SHOWING) {
+            if(  mStatus== SweetSheet.Status.SHOWING) {
 
                 mStatus = SweetSheet.Status.SHOW;
 

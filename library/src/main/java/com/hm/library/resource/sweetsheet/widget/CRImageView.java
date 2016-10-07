@@ -9,9 +9,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.Interpolator;
 
-import com.mingle.widget.CircleRevealHelper;
-import com.mingle.widget.GrowUpParent;
-
 
 /**
  * @author zzz40500

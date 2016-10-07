@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mingle.entity.MenuEntity;
-import com.mingle.listener.SingleClickListener;
-import com.mingle.sweetpick.SweetSheet;
-import com.mingle.sweetsheet.R;
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
+import com.hm.library.resource.sweetsheet.listener.SingleClickListener;
+import com.hm.library.resource.sweetsheet.sweetpick.SweetSheet;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;

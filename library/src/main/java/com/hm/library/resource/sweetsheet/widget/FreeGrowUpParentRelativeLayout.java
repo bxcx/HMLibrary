@@ -9,8 +9,7 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.mingle.sweetsheet.R;
-import com.mingle.widget.*;
+import com.hm.library.R;
 
 
 /**
@@ -20,7 +19,7 @@ import com.mingle.widget.*;
  * @github: https://github.com/zzz40500
  *
  */
-public class FreeGrowUpParentRelativeLayout extends RelativeLayout implements com.mingle.widget.GrowUpParent {
+public class FreeGrowUpParentRelativeLayout extends RelativeLayout implements GrowUpParent {
 
 
     private float downY;

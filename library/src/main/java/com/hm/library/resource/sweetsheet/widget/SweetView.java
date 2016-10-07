@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
-import com.mingle.SimpleAnimationListener;
-import com.mingle.sweetsheet.R;
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.SimpleAnimationListener;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
 

@@ -2,7 +2,6 @@ package com.hm.library.resource.sweetsheet.listener;
 
 import android.view.View;
 
-import com.mingle.listener.*;
 
 
 /**
@@ -15,7 +14,7 @@ public class SingleClickListener implements View.OnClickListener {
 
     private View.OnClickListener mListener;
 
-    private com.mingle.listener.SingleClickHelper singleClickhelper =new com.mingle.listener.SingleClickHelper();
+    private SingleClickHelper singleClickhelper =new SingleClickHelper();
 
     public SingleClickListener(View.OnClickListener mListener) {
         this.mListener = mListener;

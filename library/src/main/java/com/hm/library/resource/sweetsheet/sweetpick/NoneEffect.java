@@ -3,12 +3,11 @@ package com.hm.library.resource.sweetsheet.sweetpick;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.mingle.sweetpick.*;
 
 /**
  * Created by zzz40500 on 15/8/9.
  */
-public class NoneEffect implements com.mingle.sweetpick.Effect {
+public class NoneEffect implements Effect {
     @Override
     public float getValue() {
         return 0;

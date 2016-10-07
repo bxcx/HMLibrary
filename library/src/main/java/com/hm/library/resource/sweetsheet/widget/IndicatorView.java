@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
-import com.mingle.sweetsheet.R;
-import com.mingle.widget.CircleRevealHelper;
+
+import com.hm.library.R;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
 

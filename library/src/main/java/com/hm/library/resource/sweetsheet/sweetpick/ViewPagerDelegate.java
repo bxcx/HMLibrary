@@ -5,15 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import com.mingle.adapter.ViewpagerAdapter;
-import com.mingle.entity.MenuEntity;
-import com.mingle.sweetpick.*;
-import com.mingle.sweetpick.SweetSheet;
-import com.mingle.viewhandler.MenuListViewHandler;
-import com.mingle.sweetsheet.R;
-import com.mingle.widget.FreeGrowUpParentRelativeLayout;
-import com.mingle.widget.IndicatorView;
-import com.mingle.widget.SweetView;
+
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.adapter.ViewpagerAdapter;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
+import com.hm.library.resource.sweetsheet.viewhandler.MenuListViewHandler;
+import com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout;
+import com.hm.library.resource.sweetsheet.widget.IndicatorView;
+import com.hm.library.resource.sweetsheet.widget.SweetView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
  * @github: https://github.com/zzz40500
  *
  */
-public class ViewPagerDelegate extends com.mingle.sweetpick.Delegate {
+public class ViewPagerDelegate extends Delegate {
 
     private ArrayList<MenuListViewHandler> mMenuListViewHandlers;
     private IndicatorView mIndicatorView;
@@ -32,7 +32,7 @@ public class ViewPagerDelegate extends com.mingle.sweetpick.Delegate {
     private SweetView mSweetView;
     private MenuListViewHandler mMenuListViewHandler;
     private FreeGrowUpParentRelativeLayout mFreeGrowUpParentRelativeLayout;
-    private com.mingle.sweetpick.SweetSheet.OnMenuItemClickListener mOnMenuItemClickListener;
+    private SweetSheet.OnMenuItemClickListener mOnMenuItemClickListener;
     private  List<MenuEntity> mMenuEntities;
 
     private int mNumColumns=3;
@@ -139,7 +139,7 @@ public class ViewPagerDelegate extends com.mingle.sweetpick.Delegate {
 
 
     @Override
-    protected void setOnMenuItemClickListener(com.mingle.sweetpick.SweetSheet.OnMenuItemClickListener onItemClickListener) {
+    protected void setOnMenuItemClickListener(SweetSheet.OnMenuItemClickListener onItemClickListener) {
         mOnMenuItemClickListener = onItemClickListener;
 
     }
@@ -168,7 +168,7 @@ public class ViewPagerDelegate extends com.mingle.sweetpick.Delegate {
 
         @Override
         public void onStart() {
-            mStatus = com.mingle.sweetpick.SweetSheet.Status.SHOWING;
+            mStatus = SweetSheet.Status.SHOWING;
             mIndicatorView.setVisibility(View.INVISIBLE);
             if (mMenuListViewHandler != null) {
                 mMenuListViewHandler.animationOnStart();
@@ -178,7 +178,7 @@ public class ViewPagerDelegate extends com.mingle.sweetpick.Delegate {
 
         @Override
         public void onEnd() {
-            if( mStatus== com.mingle.sweetpick.SweetSheet.Status.SHOWING) {
+            if( mStatus== SweetSheet.Status.SHOWING) {
                 mIndicatorView.alphaShow(true);
 
                 mIndicatorView.setVisibility(View.VISIBLE);

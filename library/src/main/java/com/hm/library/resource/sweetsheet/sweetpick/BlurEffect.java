@@ -3,15 +3,12 @@ package com.hm.library.resource.sweetsheet.sweetpick;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.mingle.sweetpick.*;
-import com.mingle.utils.Blur;
+import com.hm.library.resource.sweetsheet.utils.Blur;
 
 /**
  * @author zzz40500
@@ -19,7 +16,7 @@ import com.mingle.utils.Blur;
  * @date 2015/8/9.
  * @github: https://github.com/zzz40500
  */
-public class BlurEffect implements com.mingle.sweetpick.Effect {
+public class BlurEffect implements Effect {
 
     private float Value;
 

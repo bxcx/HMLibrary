@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.mingle.sweetpick.*;
 
 /**
  * @author zzz40500
@@ -13,7 +12,7 @@ import com.mingle.sweetpick.*;
  * @github: https://github.com/zzz40500
  *
  */
-public class DimEffect implements com.mingle.sweetpick.Effect {
+public class DimEffect implements Effect {
 
     private float Value;
 

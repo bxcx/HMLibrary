@@ -9,13 +9,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LayoutAnimationController;
 import android.widget.RelativeLayout;
 
-import com.mingle.entity.MenuEntity;
-import com.mingle.sweetpick.*;
-import com.mingle.sweetpick.SweetSheet;
-import com.mingle.sweetsheet.R;
-import com.mingle.widget.CRImageView;
-import com.mingle.widget.FreeGrowUpParentRelativeLayout;
-import com.mingle.widget.SweetView;
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
+import com.hm.library.resource.sweetsheet.widget.CRImageView;
+import com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout;
+import com.hm.library.resource.sweetsheet.widget.SweetView;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -27,7 +25,7 @@ import java.util.List;
  * @date 2015/8/9.
  * @github: https://github.com/zzz40500
  */
-public class CustomDelegate extends com.mingle.sweetpick.Delegate {
+public class CustomDelegate extends Delegate {
 
 
     private SweetView mSweetView;
@@ -172,7 +170,7 @@ public class CustomDelegate extends com.mingle.sweetpick.Delegate {
         @Override
         public void onStart() {
             mFreeGrowUpParentRelativeLayout.reset();
-            mStatus = com.mingle.sweetpick.SweetSheet.Status.SHOWING;
+            mStatus = SweetSheet.Status.SHOWING;
             sliderIm.setVisibility(View.INVISIBLE);
             mContentRL.setVisibility(View.GONE);
 
@@ -182,7 +180,7 @@ public class CustomDelegate extends com.mingle.sweetpick.Delegate {
         public void onEnd() {
 
 
-            if (mStatus == com.mingle.sweetpick.SweetSheet.Status.SHOWING) {
+            if (mStatus == SweetSheet.Status.SHOWING) {
                 mStatus = SweetSheet.Status.SHOW;
 
                 if(mIsDragEnable) {

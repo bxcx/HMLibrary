@@ -6,15 +6,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.mingle.entity.MenuEntity;
-import com.mingle.sweetpick.*;
-import com.mingle.sweetpick.Delegate;
-import com.mingle.sweetpick.Effect;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +30,8 @@ public class SweetSheet {
 
 
     private ViewGroup mParentVG;
-    private com.mingle.sweetpick.Delegate mDelegate;
-    private com.mingle.sweetpick.Effect mEffect=new com.mingle.sweetpick.NoneEffect();
+    private Delegate mDelegate;
+    private Effect mEffect=new NoneEffect();
     private OnMenuItemClickListener mOnMenuItemClickListener;
     private boolean mIsBgClickEnable=true;
 
@@ -62,7 +58,7 @@ public class SweetSheet {
     }
 
 
-    public void setDelegate(com.mingle.sweetpick.Delegate delegate){
+    public void setDelegate(Delegate delegate){
         mDelegate=delegate;
         mDelegate.init(mParentVG);
         setup();

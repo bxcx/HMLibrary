@@ -4,7 +4,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mingle.viewhandler.MenuListViewHandler;
+import com.hm.library.resource.sweetsheet.viewhandler.MenuListViewHandler;
 
 import java.util.List;
 

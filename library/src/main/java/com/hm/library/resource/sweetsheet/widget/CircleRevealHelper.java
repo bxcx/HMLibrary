@@ -10,7 +10,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.mingle.SimpleAnimationListener;
+import com.hm.library.resource.sweetsheet.SimpleAnimationListener;
 import com.nineoldandroids.animation.ValueAnimator;
 
 /**

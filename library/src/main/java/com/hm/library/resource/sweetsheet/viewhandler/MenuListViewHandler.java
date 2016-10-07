@@ -3,16 +3,15 @@ package com.hm.library.resource.sweetsheet.viewhandler;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.mingle.adapter.MenuRVAdapter;
-import com.mingle.entity.MenuEntity;
-import com.mingle.sweetsheet.R;
-import com.mingle.sweetpick.SweetSheet;
+import com.hm.library.R;
+import com.hm.library.resource.sweetsheet.adapter.MenuRVAdapter;
+import com.hm.library.resource.sweetsheet.entity.MenuEntity;
+import com.hm.library.resource.sweetsheet.sweetpick.SweetSheet;
 
 import java.util.List;
 
