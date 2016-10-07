@@ -169,10 +169,14 @@ public class CustomDelegate extends Delegate {
 
         @Override
         public void onStart() {
-            mFreeGrowUpParentRelativeLayout.reset();
-            mStatus = SweetSheet.Status.SHOWING;
-            sliderIm.setVisibility(View.INVISIBLE);
-            mContentRL.setVisibility(View.GONE);
+            try {
+                mFreeGrowUpParentRelativeLayout.reset();
+                mStatus = SweetSheet.Status.SHOWING;
+                sliderIm.setVisibility(View.INVISIBLE);
+                mContentRL.setVisibility(View.GONE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -180,13 +184,17 @@ public class CustomDelegate extends Delegate {
         public void onEnd() {
 
 
-            if (mStatus == SweetSheet.Status.SHOWING) {
-                mStatus = SweetSheet.Status.SHOW;
+            try {
+                if (mStatus == SweetSheet.Status.SHOWING) {
+                    mStatus = SweetSheet.Status.SHOW;
 
-                if(mIsDragEnable) {
-                    sliderIm.setVisibility(View.VISIBLE);
-                    sliderIm.circularReveal(sliderIm.getWidth() / 2, sliderIm.getHeight() / 2, 0, sliderIm.getWidth());
+                    if(mIsDragEnable) {
+                        sliderIm.setVisibility(View.VISIBLE);
+                        sliderIm.circularReveal(sliderIm.getWidth() / 2, sliderIm.getHeight() / 2, 0, sliderIm.getWidth());
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }

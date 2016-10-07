@@ -4,7 +4,7 @@
              android:layout_height="match_parent"
              android:orientation="vertical">
 
-    <com.mingle.widget.FreeGrowUpParentRelativeLayout
+    <com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/freeGrowUpParentF"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,7 @@
         android:layout_gravity="bottom"
         >
 
-        <com.mingle.widget.SweetView
+        <com.hm.library.resource.sweetsheet.widget.SweetView
             android:id="@+id/sv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
@@ -30,7 +30,7 @@
             android:overScrollMode="never"
             />
 
-        <com.mingle.widget.CRImageView
+        <com.hm.library.resource.sweetsheet.widget.CRImageView
             android:id="@+id/sliderIM"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -39,5 +39,5 @@
             android:padding="10dp"
             android:src="@drawable/ic_slider_line"/>
 
-    </com.mingle.widget.FreeGrowUpParentRelativeLayout>
+    </com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout>
 </FrameLayout>

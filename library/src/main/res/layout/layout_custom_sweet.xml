@@ -4,19 +4,19 @@
              android:layout_height="match_parent"
              android:orientation="vertical">
 
-    <com.mingle.widget.FreeGrowUpParentRelativeLayout
+    <com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout
 
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/freeGrowUpParentF"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sheet_height"
-        app:offset="@dimen/arc_max_height"
-        android:clipChildren="false"
         android:layout_gravity="bottom"
+        android:clipChildren="false"
+        app:offset="@dimen/arc_max_height"
         >
 
-        <com.mingle.widget.SweetView
+        <com.hm.library.resource.sweetsheet.widget.SweetView
             android:id="@+id/sv"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
@@ -26,19 +26,19 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="bottom"
-            android:clipChildren="false"
             android:layout_marginTop="70dp"
+            android:clipChildren="false"
             />
 
-        <com.mingle.widget.CRImageView
+        <com.hm.library.resource.sweetsheet.widget.CRImageView
             android:id="@+id/sliderIM"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="right"
             android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             android:layout_marginTop="40dp"
             android:padding="10dp"
             android:src="@drawable/ic_slider_line"/>
 
-    </com.mingle.widget.FreeGrowUpParentRelativeLayout>
+    </com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout>
 </FrameLayout>

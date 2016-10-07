@@ -5,7 +5,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:orientation="vertical">
 
-    <com.mingle.widget.FreeGrowUpParentRelativeLayout
+    <com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sheet_height"
@@ -14,12 +14,12 @@
         app:offset="@dimen/arc_max_height"
         android:orientation="vertical">
 
-        <com.mingle.widget.SweetView
+        <com.hm.library.resource.sweetsheet.widget.SweetView
             android:id="@+id/sv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
 
-        <com.mingle.widget.IndicatorView
+        <com.hm.library.resource.sweetsheet.widget.IndicatorView
             android:id="@+id/indicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +34,6 @@
             android:layout_marginTop="42dp"
             android:clipChildren="false"
             android:overScrollMode="never"/>
-    </com.mingle.widget.FreeGrowUpParentRelativeLayout>
+    </com.hm.library.resource.sweetsheet.widget.FreeGrowUpParentRelativeLayout>
 
 </FrameLayout>
