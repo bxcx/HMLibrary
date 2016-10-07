@@ -58,7 +58,7 @@ dependencies {
     compile 'com.github.rey5137:material:1.2.4'
 
     //AndroidSweetSheet https://github.com/zzz40500/AndroidSweetSheet
-    compile 'com.github.zzz40500:AndroidSweetSheet:1.1.0'
+//    compile 'com.github.zzz40500:AndroidSweetSheet:1.1.0'
 
     //http请求 https://github.com/hongyangAndroid/okhttp-utils
     compile 'com.zhy:okhttputils:2.2.0+'

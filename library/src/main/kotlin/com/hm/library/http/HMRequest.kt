@@ -265,34 +265,47 @@ class HMRequest {
                     File(path + "/" + fileName).delete()
             }
 
-            OkHttpUtils.get().url(url).build()
-                    .execute(object : FileCallBack(path, fileName) //
-                    {
-                        override fun onResponse(response: File?) {
-//                            Logger.i("下载成功,保存在" + response?.absolutePath)
-                            if (activity != null && activity is BaseActivity) {
-                                activity.cancelLoading()
+            try {
+                OkHttpUtils.get().url(url).build()
+                        .execute(object : FileCallBack(path, fileName) //
+                        {
+                            override fun onResponse(response: File?) {
+                                //                            Logger.i("下载成功,保存在" + response?.absolutePath)
+                                if (activity != null && activity is BaseActivity) {
+                                    activity.cancelLoading()
+                                }
+                                if (showToastonResponse)
+                                    activity?.toast("下载成功,保存在" + response?.absolutePath)
+                                completionHandler.invoke(1f, response)
                             }
-                            if (showToastonResponse)
-                                activity?.toast("下载成功,保存在" + response?.absolutePath)
-                            completionHandler.invoke(1f, response)
-                        }
 
-                        override fun onError(call: Call?, e: Exception?) {
-                            activity?.toast(e?.message.toString())
-                            if (activity != null && activity is BaseActivity) {
-                                activity.cancelLoading()
+                            override fun onError(call: Call?, e: Exception?) {
+                                if (activity != null && activity is BaseActivity) {
+                                    activity.cancelLoading()
+                                }
+                                activity?.toast(e?.message.toString())
+                                if (activity != null && activity is BaseActivity) {
+                                    activity.cancelLoading()
+                                }
+                                if (needCallBack) {
+                                    completionHandler.invoke(-1f, null)
+                                }
                             }
-                            if (needCallBack) {
-                                completionHandler.invoke(-1f, null)
+
+                            override fun inProgress(progress: Float) {
+                                completionHandler.invoke(progress, null)
                             }
-                        }
 
-                        override fun inProgress(progress: Float) {
-                            completionHandler.invoke(progress, null)
-                        }
-
-                    })
+                        })
+            } catch(e: Exception) {
+                if (activity != null && activity is BaseActivity) {
+                    activity.cancelLoading()
+                }
+                activity?.toast("下载失败")
+                if (needCallBack) {
+                    completionHandler.invoke(-1f, null)
+                }
+            }
         }
 
         fun getFullURL(url: String, params: Map<String, Any>): String {
