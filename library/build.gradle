@@ -71,6 +71,8 @@ dependencies {
     //Log日志 https://github.com/orhanobut/logger
     compile 'com.orhanobut:logger:1.11+'
 
+    compile 'com.nineoldandroids:library:2.4.0'
+
     //RecyclerView https://github.com/jdsjlzx/LRecyclerView
     //compile 'com.github.jdsjlzx:LRecyclerView:1.0.8'
 
